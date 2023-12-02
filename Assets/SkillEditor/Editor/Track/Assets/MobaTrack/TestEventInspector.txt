@@ -1,0 +1,10 @@
+﻿using UnityEditor;
+
+[CustomEditor(typeof(_Event类名CSInspectorHelper))]
+public class _Event类名CSDataInspector : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+    }
+}

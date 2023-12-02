@@ -1,0 +1,73 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/SkillEditor/Editor/Track/Assets/USS/Extend.uss?fileID=7433441132597879392&amp;guid=e9f808c51e2cdb643b06477e63a0d609&amp;type=3#Extend" />
+    <uie:Toolbar name="TopMenu" style="height: 30px; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 1px; -unity-font-definition: none; -unity-font: url(&apos;project://database/Assets/SkillEditor/Editor/Assets/Alibaba-PuHuiTi-Regular.ttf?fileID=12800000&amp;guid=230468bc83f820d46989f0100b846858&amp;type=3#Alibaba-PuHuiTi-Regular&apos;);">
+        <ui:VisualElement style="flex-direction: row; width: 40%; flex-shrink: 1; flex-grow: 1;">
+            <ui:VisualElement style="flex-direction: row; flex-grow: 0; width: 200px; border-left-color: rgb(34, 33, 33); border-right-color: rgb(34, 33, 33); border-top-color: rgb(34, 33, 33); border-bottom-color: rgb(34, 33, 33); border-left-width: 0; border-right-width: 1px; border-top-width: 0; border-bottom-width: 0; margin-left: 0; margin-right: 0; flex-shrink: 0; margin-top: 0; margin-bottom: 0; align-items: center; justify-content: center;">
+                <ui:Label text="技能配置文件" display-tooltip-when-elided="true" name="SkillConfigNameLabel" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: middle-left; width: auto; font-size: 12px; margin-right: 10px;" />
+                <uie:ObjectField name="SkillConfigObjectField" allow-scene-objects="false" style="flex-direction: row; flex-grow: 0; align-items: center; width: 40%; font-size: 10px; justify-content: center; flex-shrink: 1; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; -unity-text-align: middle-left;" />
+            </ui:VisualElement>
+            <uie:ToolbarButton text="管理轨道" display-tooltip-when-elided="true" name="CreateSkillTrackButton" class="txt_ali_font" style="-unity-text-align: middle-left;" />
+            <ui:VisualElement style="flex-direction: row; width: auto; border-left-width: 0; border-left-color: rgb(32, 32, 32); border-right-color: rgb(32, 32, 32); border-top-color: rgb(32, 32, 32); border-bottom-color: rgb(32, 32, 32); flex-grow: 1; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; border-right-width: 1px; border-top-width: 0; border-bottom-width: 0; flex-shrink: 1; align-items: center; justify-content: center;">
+                <ui:Label text="预览物体" display-tooltip-when-elided="true" name="PreviewCharacterGONameLabel" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: middle-left; flex-shrink: 1; flex-grow: 0; white-space: normal; width: auto; -unity-font-style: normal; font-size: 12px; margin-right: 10px;" />
+                <uie:ObjectField name="PreviewCharacterPrefabObjectField" type="UnityEngine.GameObject, UnityEngine.CoreModule" allow-scene-objects="false" style="flex-shrink: 1; flex-grow: 0; align-items: center; width: 40%; font-size: 10px; -unity-text-align: middle-left; flex-direction: row; justify-content: center; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; -unity-font-style: normal;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <uie:ToolbarBreadcrumbs style="width: auto; border-right-color: rgb(34, 33, 33); border-right-width: 0; border-left-width: 0; border-left-color: rgb(34, 33, 33); border-top-color: rgb(34, 33, 33); border-bottom-color: rgb(34, 33, 33); border-top-width: 0; border-bottom-width: 0; flex-shrink: 1; align-items: center; justify-content: center; margin-right: 0; flex-grow: 0; -unity-text-align: middle-center;">
+            <ui:Label text="选择场景" display-tooltip-when-elided="true" style="-unity-text-align: middle-left; font-size: 12px; flex-shrink: 0; flex-grow: 0; width: auto; padding-left: 2px;" />
+            <ui:DropdownField index="-1" name="SelectSceneDrapDown" choices="0" style="width: 60px; flex-grow: 0; flex-shrink: 0;" />
+        </uie:ToolbarBreadcrumbs>
+        <uie:ToolbarButton text="加载编辑器场景" display-tooltip-when-elided="true" name="LoadEditorSceneButton" class="txt_ali_font" style="width: auto; flex-shrink: 0; flex-grow: 1; border-left-width: 1px; border-right-width: 1px; border-top-width: 0; border-bottom-width: 0; border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; justify-content: flex-start; border-left-color: rgb(35, 35, 35); border-right-color: rgb(35, 35, 35); border-top-color: rgb(35, 35, 35); border-bottom-color: rgb(35, 35, 35); -unity-text-align: middle-center;" />
+        <uie:ToolbarButton text="技能配置" display-tooltip-when-elided="true" name="SkillBasicButton" class="txt_ali_font" style="flex-shrink: 1; flex-grow: 1; border-left-width: 1px; border-right-width: 1px; width: auto; border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; border-top-width: 0; border-bottom-width: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-top: 0; padding-left: 0; padding-right: 0; padding-bottom: 0; -unity-text-align: middle-center;" />
+        <uie:ToolbarButton text="保存" display-tooltip-when-elided="true" name="SaveConfigButton" class="txt_ali_font" style="flex-grow: 1; -unity-text-align: middle-center; padding-top: 0; padding-left: 0; padding-right: 0; padding-bottom: 0;" />
+        <ui:VisualElement style="flex-direction: row;">
+            <ui:Label text="Auto" display-tooltip-when-elided="true" style="align-items: center; justify-content: center; -unity-text-align: middle-left; font-size: 10px; padding-left: 2px;" />
+            <ui:Toggle name="AutoSaveToggle" style="right: 0; width: auto; align-items: center; justify-content: center;" />
+        </ui:VisualElement>
+    </uie:Toolbar>
+    <uie:Toolbar name="ControllerToolBar" style="border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 1px; border-left-color: rgb(34, 33, 33); border-right-color: rgb(34, 33, 33); border-top-color: rgb(34, 33, 33); border-bottom-color: rgb(34, 33, 33); padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-font-definition: none; -unity-font: url(&apos;project://database/Assets/SkillEditor/Editor/Assets/Alibaba-PuHuiTi-Regular.ttf?fileID=12800000&amp;guid=230468bc83f820d46989f0100b846858&amp;type=3#Alibaba-PuHuiTi-Regular&apos;);">
+        <ui:VisualElement style="flex-direction: row; align-items: center; width: 200px; border-right-width: 1px; border-left-color: rgb(34, 33, 33); border-right-color: rgb(34, 33, 33); border-top-color: rgb(34, 33, 33); border-bottom-color: rgb(34, 33, 33); justify-content: flex-start;">
+            <ui:VisualElement style="height: 100%; flex-direction: row; align-items: center; justify-content: center; width: 50%; flex-grow: 0; border-right-width: 1px; border-left-color: rgb(35, 35, 35); border-right-color: rgb(35, 35, 35); border-top-color: rgb(35, 35, 35); border-bottom-color: rgb(35, 35, 35);">
+                <ui:Label text="FPS" display-tooltip-when-elided="true" style="height: auto; -unity-text-align: middle-left; align-items: center; justify-content: center; padding-right: 1px; flex-shrink: 1; margin-right: 10px;" />
+                <ui:DropdownField index="-1" choices="30,60,120" name="FPSDropDownField" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; height: auto; flex-shrink: 1;" />
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-direction: row; align-items: center; justify-content: center; flex-grow: 1;">
+                <ui:Label text="Speed" display-tooltip-when-elided="true" style="margin-right: 10px;" />
+                <uie:FloatField value="0" name="ConsoleAnimationSpeed" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <uie:ToolbarButton text="清理场景" display-tooltip-when-elided="true" name="ClearSceneTopBarButton" style="width: 58px;" />
+    </uie:Toolbar>
+    <ui:VisualElement name="Content" style="flex-direction: row; height: 100%;">
+        <ui:VisualElement name="Left" style="width: auto; min-width: 200px; flex-shrink: 1; margin-right: 0; border-right-width: 0.5px; border-right-color: rgb(31, 31, 31); height: 100%; flex-grow: 1; max-width: none; min-height: auto;">
+            <ui:VisualElement name="Controller" focusable="false" style="height: 30px; border-bottom-color: rgb(31, 31, 31); border-bottom-width: 1px; flex-direction: row; flex-shrink: 0; flex-grow: 0; width: auto; max-width: 200px; min-width: 200px; max-height: 30px; min-height: 30px; border-left-width: 0; border-right-width: 0; border-top-width: 0; margin-bottom: 0;">
+                <ui:VisualElement name="PlayController" style="flex-direction: row; flex-shrink: 1; width: auto; flex-grow: 0;">
+                    <uie:ToolbarButton text="&lt;&lt;" display-tooltip-when-elided="true" name="ToTheHeadButton" style="-unity-text-align: middle-left; border-left-width: 1px; border-left-color: rgb(35, 35, 35); padding-left: 4px; padding-right: 4px; padding-top: 0; padding-bottom: 0; border-right-color: rgb(35, 35, 35); border-top-color: rgb(35, 35, 35); border-bottom-color: rgb(35, 35, 35);" />
+                    <uie:ToolbarButton text="&lt;" display-tooltip-when-elided="true" name="PreviousFrameButton" style="-unity-text-align: middle-left; border-left-width: 1px; padding-top: 0;" />
+                    <uie:ToolbarButton text="▶" display-tooltip-when-elided="true" name="PlayButton" style="padding-top: 0; -unity-text-align: middle-left; border-left-width: 1px;" />
+                    <uie:ToolbarButton text="&gt;" display-tooltip-when-elided="true" name="NextFrameButton" style="border-left-width: 1px; -unity-text-align: middle-left; padding-top: 0;" />
+                    <uie:ToolbarButton text="&gt;&gt;" display-tooltip-when-elided="true" name="ToTheEndButton" style="border-left-width: 1px; -unity-text-align: middle-left; padding-top: 0;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="FrameAbout" style="flex-direction: row; justify-content: center; align-items: center; flex-grow: 1;">
+                    <uie:IntegerField value="0" is-delayed="true" name="CurrentFrameTextField" style="width: auto; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; flex-direction: row; align-items: center;" />
+                    <ui:Label text="/" display-tooltip-when-elided="true" style="font-size: 15px; align-items: center; -unity-text-align: middle-center; white-space: nowrap;" />
+                    <uie:IntegerField value="0" name="FrameCountTextFiled" style="width: auto; height: auto;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:ScrollView name="TrackMenuScrollView" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Hidden" style="flex-grow: 1; border-right-width: 0; border-left-color: rgb(34, 33, 33); border-right-color: rgb(34, 33, 33); border-top-color: rgb(34, 33, 33); border-bottom-color: rgb(34, 33, 33);">
+                <ui:VisualElement name="TrackMenuList" style="width: auto; height: 1000px; margin-left: 4px; flex-grow: 1; flex-shrink: 1; min-height: auto; max-height: none; border-left-color: rgb(34, 33, 33); border-right-color: rgb(34, 33, 33); border-top-color: rgb(34, 33, 33); border-bottom-color: rgb(34, 33, 33);">
+                    <ui:VisualElement style="width: auto; min-width: auto; height: 10px; min-height: 10px;" />
+                </ui:VisualElement>
+            </ui:ScrollView>
+        </ui:VisualElement>
+        <ui:VisualElement name="Right" style="flex-grow: 1; flex-shrink: 1; margin-left: 10px; margin-right: 0; height: 100%;">
+            <ui:VisualElement style="width: 10px; height: 30px; position: absolute; left: -10px; right: auto; flex-shrink: 0; border-bottom-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(31, 31, 31);" />
+            <ui:IMGUIContainer name="TimeShaft" style="height: 30px; margin-right: 12px; border-bottom-color: rgb(31, 31, 31); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0.5px; flex-shrink: 0; flex-grow: 0;" />
+            <ui:ScrollView name="MainContentView" mode="VerticalAndHorizontal" horizontal-scroller-visibility="AlwaysVisible" vertical-scroller-visibility="AlwaysVisible" style="flex-grow: 1; height: auto; flex-basis: auto; max-height: none; min-height: auto;">
+                <ui:VisualElement name="ContentListView" style="min-height: auto; flex-shrink: 0; flex-grow: 0; height: 1000px;">
+                    <ui:VisualElement style="height: 10px; max-height: none; min-height: 10px;" />
+                </ui:VisualElement>
+            </ui:ScrollView>
+            <ui:IMGUIContainer name="SelectLine" style="position: absolute; left: 0;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,21 @@
+ToolbarButton:hover {
+    background-color: rgb(83, 110, 168);
+}
+
+.button_hover:hover {
+    background-color: rgb(83, 110, 168);
+}
+
+.button_hover {
+    background-color: rgb(56, 56, 56);
+}
+
+Label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.txt_font {
+    -unity-font: url('project://database/Assets/SkillEditor/Editor/Assets/Alibaba-PuHuiTi-Bold.ttf?fileID=12800000&guid=30e8fb217f986934194b584734c5b683&type=3#Alibaba-PuHuiTi-Bold');
+    font-size: 15px;
+}

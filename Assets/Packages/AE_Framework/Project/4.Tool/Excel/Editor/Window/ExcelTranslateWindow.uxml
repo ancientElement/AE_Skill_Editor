@@ -1,0 +1,23 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements"
+         xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements"
+         noNamespaceSchemaLocation="../../../../../../../../UIElementsSchema/UIElements.xsd"
+         editor-extension-mode="True">
+    <Style src="project://database/Assets/AE_Framework/Project/4.Tool/Excel/Editor/Window/ExcelTranslateWindow.uss?fileID=7433441132597879392&amp;guid=99ede71ee2e79e046bf23ed831e9e354&amp;type=3#ExcelTranslateWindow"/>
+    <ui:Label text="Excel工具" display-tooltip-when-elided="true" class="label-title"
+              style="-unity-text-align: middle-center; -unity-font-definition: none; -unity-font: url(&apos;project://database/Library/unity%20default%20resources?fileID=10102&amp;guid=0000000000000000e000000000000000&amp;type=0#Arial&apos;);"/>
+    <ui:VisualElement name="GenerateSOCSArea" style="display: flex; font-size: 15px;">
+        <ui:Label text="生成普通ScriptableObject" display-tooltip-when-elided="true"
+                  style="-unity-text-align: middle-center;"/>
+        <ui:Label text="拖拽Excel到此处" display-tooltip-when-elided="true" name="ExcalPathDragArea"
+                  style="-unity-text-align: middle-center; width: auto; height: 40px; margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(42, 42, 42); border-right-color: rgb(42, 42, 42); border-top-color: rgb(42, 42, 42); border-bottom-color: rgb(42, 42, 42);"/>
+        <ui:IMGUIContainer name="ExcalPathsArea" style="height: auto;"/>
+        <ui:TextField picking-mode="Ignore" label="数据结构类存放位置" name="CSDataPathTextField" readonly="true"/>
+        <ui:TextField picking-mode="Ignore" label="SOC#类文件存放位置" name="CSContainerDataPathTextField"
+                      readonly="true" style="flex-direction: row;"/>
+        <ui:Button text="第一步:生成容器类与数据类" display-tooltip-when-elided="true"
+                   name="GenerateSOContainerCSButton"/>
+        <ui:TextField picking-mode="Ignore" label="SO文件存放位置" name="SODataPathTextField" readonly="true"/>
+        <ui:Button text="第二步:生成ScriptableObject" display-tooltip-when-elided="true" name="GenerateSOCSButton"/>
+        <ui:Button text="生成JSON" display-tooltip-when-elided="true" name="GenerateJSONCSButton"/>
+    </ui:VisualElement>
+</ui:UXML>
