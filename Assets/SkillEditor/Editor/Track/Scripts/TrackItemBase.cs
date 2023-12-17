@@ -45,7 +45,7 @@ namespace ARPG_AE_JOKER.SkillEditor
         protected int frameIndex;//开始帧
         public int FrameIndex { get => frameIndex; }//开始帧
 
-        public virtual void Init(TParentTrack m_ParentTrack, SkillTrackStyleBase m_parentTrackStyle, SkillFrameEventBase m_ItemData, int frameIndex, float frameUniWidth)
+        public virtual void Init(TParentTrack m_ParentTrack, SkillTrackStyleBase m_parentTrackStyle, SkillFrameEventBase m_ItemData, int frameIndex, float frameUniWidth, SimpleItemStyle simpleItemStyle = null)
         {
             this.m_ParentTrack = m_ParentTrack;
             this.m_parentTrackStyle = m_parentTrackStyle;
@@ -53,7 +53,7 @@ namespace ARPG_AE_JOKER.SkillEditor
             this.frameUniWidth = frameUniWidth;
 
             this.m_ItemData = m_ItemData as TEvent;
-            this.m_SelfStyle = new SimpleItemStyle();
+            this.m_SelfStyle = simpleItemStyle == null ? new SimpleItemStyle() : simpleItemStyle;
 
             this.m_SelfStyle.Init(m_parentTrackStyle, CaculateWidth(frameUniWidth), CaculatePosiotion(frameUniWidth), CaculateName());
 

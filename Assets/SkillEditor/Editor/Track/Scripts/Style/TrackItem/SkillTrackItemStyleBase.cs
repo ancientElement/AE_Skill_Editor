@@ -1,3 +1,5 @@
+using Sirenix.Utilities;
+using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -52,7 +54,7 @@ namespace ARPG_AE_JOKER.SkillEditor
             m_ParentTrackStyle.DeleteItem(root);
         }
 
-        public void SetName(string name)
+        public virtual void SetName(string name)
         { root.Q<Label>().text = name; }
 
         public virtual void SetBGColor(Color color)
@@ -71,9 +73,57 @@ namespace ARPG_AE_JOKER.SkillEditor
 
     public class SimpleItemStyle : SkillTrackItemStyleBase
     {
-        public override void Init(SkillTrackStyleBase ParentTrackStyle, float width, float position, string name, string TrackItemAssetPAth = "Assets/SkillEditor/Editor/Track/Assets/TrackItem/AnimationTrackItem.uxml")
+        public override void Init(SkillTrackStyleBase ParentTrackStyle, float width, float position, string name, string TrackItemAssetPAth = null)
         {
+            TrackItemAssetPAth = TrackItemAssetPAth == null ? "Assets/SkillEditor/Editor/Track/Assets/TrackItem/AnimationTrackItem.uxml" : TrackItemAssetPAth;
             base.Init(ParentTrackStyle, width, position, name, TrackItemAssetPAth);
+        }
+    }
+
+    public class EventItemStyle : SimpleItemStyle
+    {
+        IMGUIContainer iMGUIContainer;
+        Color iMGUIColor;
+
+        public override void Init(SkillTrackStyleBase ParentTrackStyle, float width, float position, string name, string TrackItemAssetPAth = null)
+        {
+            base.Init(ParentTrackStyle, width, position, name, "Assets/SkillEditor/Editor/Track/Assets/TrackItem/EvenItemStyle.uxml");
+            iMGUIContainer = root.Q<IMGUIContainer>("EventItemIMGUIContainer");
+            iMGUIContainer.onGUIHandler = DrawEventItem;
+        }
+
+        private void DrawEventItem()
+        {
+            Handles.BeginGUI();
+
+            Handles.color = iMGUIColor;
+            Rect rect = iMGUIContainer.contentRect;
+
+            //Handles.DrawLine(new Vector3(rect.x, 0.1f), new Vector3(rect.x + rect.width, 0.1f));
+
+            //绘制事件标签
+            Vector3[] list = new Vector3[5] {
+              new Vector3(rect.width*0.5f,0),
+              new Vector3(rect.width,rect.width * 0.5f),
+              new Vector3(rect.width,rect.height),
+              new Vector3(0,rect.height),
+              new Vector3(0,rect.width* 0.5f)
+            };
+            Handles.DrawAAConvexPolygon(list);
+
+            Handles.EndGUI();
+        }
+
+        public override void SetBGColor(Color color)
+        {
+            //base.SetBGColor(color);
+            iMGUIColor = color;
+        }
+
+        public override void SetName(string name)
+        {
+            //base.SetName(name);
+            root.Q<Label>("EventNameLabel").text = name;
         }
     }
 }

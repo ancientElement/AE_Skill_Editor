@@ -6,7 +6,7 @@ namespace ARPG_AE_JOKER.SkillEditor
 {
     public class MultLineTrackItem<TEvent> : TrackItemBase<ChildTrackBase<TEvent>, TEvent> where TEvent : SkillMultiLineFrameEventBase
     {
-        public override void Init(ChildTrackBase<TEvent> m_ParentTrack, SkillTrackStyleBase m_parentTrackStyle, SkillFrameEventBase m_ItemData, int frameIndex, float frameUniWidth)
+        public override void Init(ChildTrackBase<TEvent> m_ParentTrack, SkillTrackStyleBase m_parentTrackStyle, SkillFrameEventBase m_ItemData, int frameIndex, float frameUniWidth,SimpleItemStyle simpleItemStyle = null)
         {
             base.Init(m_ParentTrack, m_parentTrackStyle, m_ItemData, frameIndex, frameUniWidth);
         }

@@ -5,7 +5,7 @@ namespace ARPG_AE_JOKER.SkillEditor
 {
     public class AnimationDriver
     {
-        public static void Drive(SkillSingLineTrackDataBase<SkillAnimationEvent> AnimationData, int currentFrameIndex, Action<Vector3, Quaternion> rootMotionAction, Animation_Controller animation_Controller)
+        public static void Drive(SkillSingLineTrackDataBase<SkillAnimationEvent> AnimationData, int currentFrameIndex, RootMotionAction rootMotionAction, Animation_Controller animation_Controller)
         {
             if (AnimationData != null)
             {

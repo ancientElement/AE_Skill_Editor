@@ -10,11 +10,14 @@ public class TestPlayMode : MonoBehaviour
     [SerializeField] private Skill_Player skill_Player;
     [SerializeField] private SkillConfig[] skillConfig;
     [SerializeField] private CharacterController characterController;
+    [SerializeField] private Rigidbody body;
     [SerializeField] private AnimationClip idleClip;
     [SerializeField] private Transform[] weapons;
     [SerializeField] private SkillConfig[] katana_open;
     [SerializeField] private SkillConfig[] grateSword_open;
     [Range(0, 9.8f), SerializeField] private float grativ;
+
+    [SerializeField, Range(1, -1)] private int useRigidBodyOrCharactorContrller;
 
     private void Awake()
     {
@@ -53,6 +56,11 @@ public class TestPlayMode : MonoBehaviour
                 skill_Player.PlaySkill(skillConfig[currentKey], SkillEnd, RootMotionEvent);
             }
         };
+
+        animation_Controller.AddAnimationEventListener("Start_Input", () =>
+        {
+            Debug.Log("Start_Input");
+        });
     }
 
     private void Update()
@@ -105,10 +113,13 @@ public class TestPlayMode : MonoBehaviour
         animation_Controller.PlaySingleAnimation(idleClip);
     }
 
-    public void RootMotionEvent(Vector3 pos, Quaternion rot)
+    public void RootMotionEvent(Vector3 pos, Quaternion rot, Vector3 velocity)
     {
         pos.y -= grativ * Time.deltaTime;
-        characterController.Move(pos);
+        if (useRigidBodyOrCharactorContrller < 0)
+            body.velocity = velocity;
+        else
+            characterController.Move(pos);
         modelTransfrom.transform.rotation *= rot;
     }
 }

@@ -9,7 +9,7 @@ namespace ARPG_AE_JOKER.SkillEditor
         protected override Color m_selectColor => new Color(0.498f, 0.839f, 0.988f, 1);
         protected override Color m_normalColor => new Color(0.388f, 0.651f, 0.769f, 1);
 
-        public override void Init(ChildTrackBase<SkillEffectEvent> m_ParentTrack, SkillTrackStyleBase m_parentTrackStyle, SkillFrameEventBase m_ItemData, int frameIndex, float frameUniWidth)
+        public override void Init(ChildTrackBase<SkillEffectEvent> m_ParentTrack, SkillTrackStyleBase m_parentTrackStyle, SkillFrameEventBase m_ItemData, int frameIndex, float frameUniWidth, SimpleItemStyle simpleItemStyle = null)
         {
             base.Init(m_ParentTrack, m_parentTrackStyle, m_ItemData, frameIndex, frameUniWidth);
 

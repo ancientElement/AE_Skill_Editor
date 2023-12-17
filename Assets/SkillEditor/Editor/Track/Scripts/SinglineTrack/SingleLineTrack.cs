@@ -236,7 +236,7 @@ namespace ARPG_AE_JOKER.SkillEditor
         /// </summary>
         /// <param name="clip"></param>
         /// <param name="localMousePositionX"></param>
-        private void PlaceObj(object clip, float localMousePositionX)
+        protected void PlaceObj(object clip, float localMousePositionX)
         {
             if (clip != null)
             {

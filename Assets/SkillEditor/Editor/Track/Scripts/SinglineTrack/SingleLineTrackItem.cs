@@ -6,9 +6,9 @@ namespace ARPG_AE_JOKER.SkillEditor
 {
     public class SingleLineTrackItem<TEvent> : TrackItemBase<TrackBase, TEvent> where TEvent : SkillFrameEventBase
     {
-        public override void Init(TrackBase m_ParentTrack, SkillTrackStyleBase m_parentTrackStyle, SkillFrameEventBase m_ItemData, int frameIndex, float frameUniWidth)
+        public override void Init(TrackBase m_ParentTrack, SkillTrackStyleBase m_parentTrackStyle, SkillFrameEventBase m_ItemData, int frameIndex, float frameUniWidth, SimpleItemStyle simpleItemStyle = null)
         {
-            base.Init(m_ParentTrack, m_parentTrackStyle, m_ItemData, frameIndex, frameUniWidth);
+            base.Init(m_ParentTrack, m_parentTrackStyle, m_ItemData, frameIndex, frameUniWidth, simpleItemStyle);
         }
 
         /// <summary>

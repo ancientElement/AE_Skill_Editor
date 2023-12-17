@@ -67,7 +67,7 @@ namespace ARPG_AE_JOKER.SkillEditor
             FrameCountTextFiled.value = CurrentFrameCount;
         }
 
-        private void ResetView()
+        public void ResetView()
         {
             SkillConfig tempSkillConfig = skillConfig;
             SkillConfigObjectField.value = null;

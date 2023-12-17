@@ -1,3 +1,4 @@
+using Assets.SkillEditor.RunTime.Player.Driver;
 using System;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ namespace ARPG_AE_JOKER.SkillEditor
         private float playTotalTime;//播放时长
         private int frameRate;//帧率
 
-        private Action<Vector3, Quaternion> rootMotionAction;
+        private RootMotionAction rootMotionAction;
         private Action SkillEndAction;
 
         private Transform modelTransfrom;
@@ -24,6 +25,7 @@ namespace ARPG_AE_JOKER.SkillEditor
         private SkillMultiLineTrackDataBase<SkillAudioEvent> AudioData;
         private SkillMultiLineTrackDataBase<SkillEffectEvent> EffectData;
         private SkillMultiLineTrackDataBase<AttackDetectionEvent> attackDetectionData;
+        private SkillSingLineTrackDataBase<EventTrigerEvent> eventTrigerData;
 
         public void Init(Animation_Controller animation_Controller, Transform modelTransfrom)
         {
@@ -34,7 +36,7 @@ namespace ARPG_AE_JOKER.SkillEditor
         /// <summary>
         /// 播放技能
         /// </summary>
-        public void PlaySkill(SkillConfig skillConfig, Action skillEndAction, Action<Vector3, Quaternion> rootMotionEvent = null)
+        public void PlaySkill(SkillConfig skillConfig, Action skillEndAction, RootMotionAction rootMotionEvent = null)
         {
             this.skillConfig = skillConfig;
             this.frameRate = skillConfig.FrameRate;
@@ -48,6 +50,7 @@ namespace ARPG_AE_JOKER.SkillEditor
             this.AudioData = null;
             this.EffectData = null;
             this.attackDetectionData = null;
+            this.eventTrigerData = null;
 
             if (skillConfig.trackDataDic.ContainsKey("ARPG_AE_JOKER.SkillEditor.AnimationTrack"))
             {
@@ -64,6 +67,10 @@ namespace ARPG_AE_JOKER.SkillEditor
             if (skillConfig.trackDataDic.ContainsKey("ARPG_AE_JOKER.SkillEditor.AttackDetectionTrack"))
             {
                 this.attackDetectionData = skillConfig.trackDataDic["ARPG_AE_JOKER.SkillEditor.AttackDetectionTrack"] as SkillMultiLineTrackDataBase<AttackDetectionEvent>;
+            }
+            if (skillConfig.trackDataDic.ContainsKey("ARPG_AE_JOKER.SkillEditor.EventTrigerTrack"))
+            {
+                this.eventTrigerData = skillConfig.trackDataDic["ARPG_AE_JOKER.SkillEditor.EventTrigerTrack"] as SkillSingLineTrackDataBase<EventTrigerEvent>;
             }
             TickSkill();
         }
@@ -113,6 +120,9 @@ namespace ARPG_AE_JOKER.SkillEditor
 
             //驱动攻击检测
             AttackDetectionDriver.Driver(attackDetectionData, currentFrameIndex, modelTransfrom, frameRate);
+
+            //事件驱动
+            EventTrigerDriver.Drive(animation_Controller, eventTrigerData, currentFrameIndex);
         }
     }
 }

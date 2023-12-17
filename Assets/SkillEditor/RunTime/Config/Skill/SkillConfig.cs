@@ -54,7 +54,6 @@ namespace ARPG_AE_JOKER.SkillEditor
         {
             skillConfigOnValidate?.Invoke();
         }
-
 #endif
     }
 }

@@ -80,7 +80,7 @@ namespace ARPG_AE_JOKER.SkillEditor
                 int durationFrameCount = nextKeyFrame - key;
                 if (durationFrameCount > 0)
                 {
-                    // 动画资源总总帧数
+                    // 动画资源总帧数
                     float clipFrameCount = animationEvent.AnimationClip.length * SkillEditorWindow.Instance.SkillConfig.FrameRate;
                     // 计算总的播放进度
                     float totalProgress = durationFrameCount / clipFrameCount;
@@ -133,6 +133,7 @@ namespace ARPG_AE_JOKER.SkillEditor
             PosAction?.Invoke(rootMositionTotalPosition);
 
             return rootMositionTotalPosition;
+            //return Vector3.zero;
         }
 
         /// <summary>

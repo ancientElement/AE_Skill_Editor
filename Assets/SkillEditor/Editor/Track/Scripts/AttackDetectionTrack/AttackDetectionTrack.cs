@@ -100,7 +100,6 @@ namespace ARPG_AE_JOKER.SkillEditor
                 if (m_TrackItem.ItemData.DetectionParamsBase != null)
                     m_TrackItem.TickView(currentFrameIndex);
         }
-
     }
 
     /// <summary>
@@ -108,12 +107,13 @@ namespace ARPG_AE_JOKER.SkillEditor
     /// </summary>
     public class AttackDetectionTrackItem : MultLineTrackItem<AttackDetectionEvent>
     {
-        public override void Init(ChildTrackBase<AttackDetectionEvent> m_ParentTrack, SkillTrackStyleBase m_parentTrackStyle, SkillFrameEventBase m_ItemData, int frameIndex, float frameUniWidth)
+        public override void Init(ChildTrackBase<AttackDetectionEvent> m_ParentTrack, SkillTrackStyleBase m_parentTrackStyle, SkillFrameEventBase m_ItemData, int frameIndex, float frameUniWidth, SimpleItemStyle simpleItemStyle = null)
         {
             base.Init(m_ParentTrack, m_parentTrackStyle, m_ItemData, frameIndex, frameUniWidth);
             //EndLine 为自定义元素绑定事件
 
             VisualElement animationEndLine = m_SelfStyle.FindElement<VisualElement>("EndLine");
+
             RegisterMouseEvent<MouseDownEvent>(animationEndLine, EndLineMouseDown);
             RegisterMouseEvent<MouseUpEvent>(animationEndLine, EndLineMouseUp);
             animationEndLine.SetCursor(MouseCursor.SplitResizeLeftRight);

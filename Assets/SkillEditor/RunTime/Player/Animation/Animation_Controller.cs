@@ -8,6 +8,14 @@ using System.Collections.Generic;
 
 namespace ARPG_AE_JOKER.SkillEditor
 {
+    /// <summary>
+    /// RootMotion委托
+    /// </summary>
+    /// <param name="deltaPosition"></param>
+    /// <param name="deltaRotation"></param>
+    /// <param name="velocity"></param>
+    public delegate void RootMotionAction(Vector3 deltaPosition, Quaternion deltaRotation, Vector3 velocity);
+
     public class Animation_Controller : MonoBehaviour
     {
         [SerializeField] private Animator animator;
@@ -207,15 +215,14 @@ namespace ARPG_AE_JOKER.SkillEditor
         }
 
         #region RootMotion
-
-        private Action<Vector3, Quaternion> rootMotionAction;
+        private RootMotionAction rootMotionAction;
 
         private void OnAnimatorMove()
         {
-            rootMotionAction?.Invoke(animator.deltaPosition, animator.deltaRotation);
+            rootMotionAction?.Invoke(animator.deltaPosition, animator.deltaRotation, animator.velocity);
         }
 
-        public void SetRootMotion(Action<Vector3, Quaternion> rootMotionAction)
+        public void SetRootMotion(RootMotionAction rootMotionAction)
         {
             this.rootMotionAction = rootMotionAction;
         }
@@ -231,7 +238,7 @@ namespace ARPG_AE_JOKER.SkillEditor
 
         private Dictionary<string, Action> animationEventDic = new Dictionary<string, Action>();
 
-        public void AnimationEvent(string eventName)
+        public void TrigerAnimationEvent(string eventName)
         {
             if (animationEventDic.TryGetValue(eventName, out Action action))
             {
@@ -239,7 +246,7 @@ namespace ARPG_AE_JOKER.SkillEditor
             }
         }
 
-        public void AddAnimationEvent(string name, Action action)
+        public void AddAnimationEventListener(string name, Action action)
         {
             if (animationEventDic.TryGetValue(name, out Action _action))
             {
