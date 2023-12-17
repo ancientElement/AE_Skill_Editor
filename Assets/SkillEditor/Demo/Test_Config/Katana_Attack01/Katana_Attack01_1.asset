@@ -37,7 +37,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 5
     - Name: 
       Entry: 7
       Data: 
@@ -117,7 +117,7 @@ MonoBehaviour:
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 7
       Data: 8|ARPG_AE_JOKER.SkillEditor.AttackDetectionEvent, Assembly-CSharp
@@ -191,6 +191,75 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 10|ARPG_AE_JOKER.SkillEditor.AttackDetectionEvent, Assembly-CSharp
+    - Name: TrackName
+      Entry: 1
+      Data: "\u653B\u51FB\u68C0\u6D4B\u8F68\u9053"
+    - Name: FrameIndex
+      Entry: 3
+      Data: 26
+    - Name: FrameDuration
+      Entry: 3
+      Data: 30
+    - Name: Position
+      Entry: 7
+      Data: UnityEngine.Vector3, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: -0.0532133467
+    - Name: 
+      Entry: 4
+      Data: 0.83
+    - Name: 
+      Entry: 4
+      Data: 1.49834311
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Rotation
+      Entry: 7
+      Data: UnityEngine.Vector3, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: DetectionParamsBase
+      Entry: 7
+      Data: 11|ARPG_AE_JOKER.SkillEditor.CubeDetectionParams, Assembly-CSharp
+    - Name: width
+      Entry: 4
+      Data: 0.73
+    - Name: height
+      Entry: 4
+      Data: 0.78
+    - Name: depth
+      Entry: 4
+      Data: 1.2
+    - Name: widthSegments
+      Entry: 3
+      Data: 1
+    - Name: heightSegments
+      Entry: 3
+      Data: 1
+    - Name: depthSegments
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -210,18 +279,18 @@ MonoBehaviour:
       Data: ARPG_AE_JOKER.SkillEditor.AudioTrack
     - Name: $v
       Entry: 7
-      Data: 10|ARPG_AE_JOKER.SkillEditor.SkillMultiLineTrackDataBase`1[[ARPG_AE_JOKER.SkillEditor.SkillAudioEvent,
+      Data: 12|ARPG_AE_JOKER.SkillEditor.SkillMultiLineTrackDataBase`1[[ARPG_AE_JOKER.SkillEditor.SkillAudioEvent,
         Assembly-CSharp]], Assembly-CSharp
     - Name: FrameData
       Entry: 7
-      Data: 11|System.Collections.Generic.List`1[[ARPG_AE_JOKER.SkillEditor.SkillAudioEvent,
+      Data: 13|System.Collections.Generic.List`1[[ARPG_AE_JOKER.SkillEditor.SkillAudioEvent,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 12|ARPG_AE_JOKER.SkillEditor.SkillAudioEvent, Assembly-CSharp
+      Data: 14|ARPG_AE_JOKER.SkillEditor.SkillAudioEvent, Assembly-CSharp
     - Name: TrackName
       Entry: 1
       Data: "\u97F3\u6548"
@@ -257,18 +326,18 @@ MonoBehaviour:
       Data: ARPG_AE_JOKER.SkillEditor.EffectTrack
     - Name: $v
       Entry: 7
-      Data: 13|ARPG_AE_JOKER.SkillEditor.SkillMultiLineTrackDataBase`1[[ARPG_AE_JOKER.SkillEditor.SkillEffectEvent,
+      Data: 15|ARPG_AE_JOKER.SkillEditor.SkillMultiLineTrackDataBase`1[[ARPG_AE_JOKER.SkillEditor.SkillEffectEvent,
         Assembly-CSharp]], Assembly-CSharp
     - Name: FrameData
       Entry: 7
-      Data: 14|System.Collections.Generic.List`1[[ARPG_AE_JOKER.SkillEditor.SkillEffectEvent,
+      Data: 16|System.Collections.Generic.List`1[[ARPG_AE_JOKER.SkillEditor.SkillEffectEvent,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 15|ARPG_AE_JOKER.SkillEditor.SkillEffectEvent, Assembly-CSharp
+      Data: 17|ARPG_AE_JOKER.SkillEditor.SkillEffectEvent, Assembly-CSharp
     - Name: TrackName
       Entry: 1
       Data: "\u7279\u6548"
@@ -335,6 +404,120 @@ MonoBehaviour:
     - Name: volumn
       Entry: 4
       Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: ARPG_AE_JOKER.SkillEditor.EventTrigerTrack
+    - Name: $v
+      Entry: 7
+      Data: 18|ARPG_AE_JOKER.SkillEditor.SkillSingLineTrackDataBase`1[[ARPG_AE_JOKER.SkillEditor.EventTrigerEvent,
+        Assembly-CSharp]], Assembly-CSharp
+    - Name: FrameData
+      Entry: 7
+      Data: 19|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[ARPG_AE_JOKER.SkillEditor.EventTrigerEvent,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 20|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 40
+    - Name: $v
+      Entry: 7
+      Data: 21|ARPG_AE_JOKER.SkillEditor.EventTrigerEvent, Assembly-CSharp
+    - Name: FrameDuration
+      Entry: 3
+      Data: 1
+    - Name: eventName
+      Entry: 1
+      Data: StartInput
+    - Name: color
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0.5
+    - Name: 
+      Entry: 4
+      Data: 0.5
+    - Name: 
+      Entry: 4
+      Data: 0.5
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 62
+    - Name: $v
+      Entry: 7
+      Data: 22|ARPG_AE_JOKER.SkillEditor.EventTrigerEvent, Assembly-CSharp
+    - Name: FrameDuration
+      Entry: 3
+      Data: 1
+    - Name: eventName
+      Entry: 1
+      Data: MixAnimation
+    - Name: color
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0.5
+    - Name: 
+      Entry: 4
+      Data: 0.5
+    - Name: 
+      Entry: 4
+      Data: 0.5
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 

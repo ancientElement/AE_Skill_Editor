@@ -23,50 +23,31 @@ namespace ARPG_AE_JOKER.SkillEditor
                             //实例化特效
                             attackDetectionObj = PoolMgr.GetGameObjNotInRes(name);
 
+                            AttackDetectionBase demo;
+
                             if (attackDetectionObj == null)
                             {
                                 attackDetectionObj = new GameObject(name);
 
                                 if (attackDetectionEvent.DetectionParamsBase is RingLikeDetectionParams)
-                                {
-                                    RingLikeDetection demo = attackDetectionObj.AddComponent<RingLikeDetection>();
-                                    demo.isDebuge = true;
-                                    demo.Init(attackDetectionEvent.DetectionParamsBase as RingLikeDetectionParams);
-                                }
+                                    demo = attackDetectionObj.AddComponent<RingLikeDetection>();
                                 else if (attackDetectionEvent.DetectionParamsBase is CubeDetectionParams)
-                                {
-                                    CubeDetection demo = attackDetectionObj.AddComponent<CubeDetection>();
-                                    demo.isDebuge = true;
-                                    demo.Init(attackDetectionEvent.DetectionParamsBase as CubeDetectionParams);
-                                }
+                                    demo = attackDetectionObj.AddComponent<CubeDetection>();
                                 else
-                                {
-                                    SphereDetection demo = attackDetectionObj.AddComponent<SphereDetection>();
-                                    demo.isDebuge = true;
-                                    demo.Init(attackDetectionEvent.DetectionParamsBase as SphereDetectionParams);
-                                }
+                                    demo = attackDetectionObj.AddComponent<SphereDetection>();
                             }
                             else
                             {
                                 if (attackDetectionEvent.DetectionParamsBase is RingLikeDetectionParams)
-                                {
-                                    RingLikeDetection demo = attackDetectionObj.GetComponent<RingLikeDetection>();
-                                    demo.isDebuge = true;
-                                    demo.Init(attackDetectionEvent.DetectionParamsBase as RingLikeDetectionParams);
-                                }
+                                    demo = attackDetectionObj.GetComponent<RingLikeDetection>();
                                 else if (attackDetectionEvent.DetectionParamsBase is CubeDetectionParams)
-                                {
-                                    CubeDetection demo = attackDetectionObj.GetComponent<CubeDetection>();
-                                    demo.isDebuge = true;
-                                    demo.Init(attackDetectionEvent.DetectionParamsBase as CubeDetectionParams);
-                                }
+                                    demo = attackDetectionObj.GetComponent<CubeDetection>();
                                 else
-                                {
-                                    SphereDetection demo = attackDetectionObj.GetComponent<SphereDetection>();
-                                    demo.isDebuge = true;
-                                    demo.Init(attackDetectionEvent.DetectionParamsBase as SphereDetectionParams);
-                                }
+                                    demo = attackDetectionObj.GetComponent<SphereDetection>();
                             }
+
+                            demo.Init(attackDetectionEvent.DetectionParamsBase);
+                            demo.isDebuge = !Application.isPlaying;
 
                             attackDetectionObj.transform.position = modelTransfrom.TransformPoint(attackDetectionEvent.Position);
                             attackDetectionObj.transform.rotation = Quaternion.Euler(modelTransfrom.eulerAngles + attackDetectionEvent.Rotation);

@@ -113,7 +113,7 @@ namespace ARPG_AE_JOKER.SkillEditor
             AnimationDriver.Drive(AnimationData, currentFrameIndex, rootMotionAction, animation_Controller);
 
             //驱动音效果
-            AudioDriver.Drive(AudioData, currentFrameIndex, transform.position);
+            AudioDriver.Drive(AudioData, currentFrameIndex, transform.position);    
 
             //驱动特效
             EffectDriver.Drive(EffectData, currentFrameIndex, modelTransfrom, frameRate);

@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using ARPG_AE_JOKER.SkillEditor;
 
 public class TestPlayMode : MonoBehaviour
@@ -16,92 +15,50 @@ public class TestPlayMode : MonoBehaviour
     [SerializeField] private SkillConfig[] katana_open;
     [SerializeField] private SkillConfig[] grateSword_open;
     [Range(0, 9.8f), SerializeField] private float grativ;
-
     [SerializeField, Range(1, -1)] private int useRigidBodyOrCharactorContrller;
+    [SerializeField] private SkillEditorSceneCamera skillEditorSceneCamera;
 
     private void Awake()
     {
         skill_Player.Init(animation_Controller, modelTransfrom);
         animation_Controller.Init();
+        body = GetComponentInParent<Rigidbody>();
+        skillEditorSceneCamera = GameObject.Find("SkillEditorSceneCamera").GetComponent<SkillEditorSceneCamera>();
+        skillEditorSceneCamera.focus = GameObject.Find("CameraPos").transform;
     }
 
-    private Keyboard keyboard;
-    private Mouse mouse;
-    private int currentKey;
 
     private void Start()
     {
         animation_Controller.PlaySingleAnimation(idleClip);
 
-        keyboard = Keyboard.current;
-        mouse = Mouse.current;
 
         foreach (var item in weapons)
         {
             item.gameObject.SetActive(false);
         }
 
-        keyboard.onTextInput += (c) =>
+        animation_Controller.AddAnimationEventListener("StartInput", () =>
         {
-            try
-            {
-                currentKey = int.Parse(c.ToString());
-                //print(currentKey);
-            }
-            catch (Exception)
-            {
-            }
-            if (currentKey >= 0 && currentKey < skillConfig.Length)
-            {
-                skill_Player.PlaySkill(skillConfig[currentKey], SkillEnd, RootMotionEvent);
-            }
-        };
+            Debug.Log("StartInput");
+        });
 
-        animation_Controller.AddAnimationEventListener("Start_Input", () =>
+        animation_Controller.AddAnimationEventListener("MixAnimation", () =>
         {
-            Debug.Log("Start_Input");
+            Debug.Log("MixAnimation");
         });
     }
 
     private void Update()
     {
-        if (mouse.leftButton.wasPressedThisFrame)
+        if (Input.anyKeyDown)
         {
-            if (weapons[0].gameObject.activeSelf && katana_open.Length > 0)
+            for (int i = 0; i < 9; i++)
             {
-                if (katana_open.Length > 0)
+                if (Input.GetKeyDown((KeyCode)256 + i))
                 {
-                    skill_Player.PlaySkill(katana_open[1], SkillEnd, RootMotionEvent);
-                }
-                weapons[0].gameObject.SetActive(false);
-            }
-            else if (!weapons[0].gameObject.activeSelf)
-            {
-                weapons[0].gameObject.SetActive(true);
-                weapons[1].gameObject.SetActive(false);
-                if (katana_open.Length > 0)
-                {
-                    skill_Player.PlaySkill(katana_open[0], SkillEnd, RootMotionEvent);
-                }
-            }
-        }
-        if (mouse.rightButton.wasPressedThisFrame)
-        {
-            if (weapons[1].gameObject.activeSelf && katana_open.Length > 0)
-            {
-                if (katana_open.Length > 0)
-                {
-                    skill_Player.PlaySkill(grateSword_open[1], SkillEnd, RootMotionEvent);
-                }
-                weapons[1].gameObject.SetActive(false);
-            }
-            else if (!weapons[1].gameObject.activeSelf)
-            {
-                weapons[0].gameObject.SetActive(false);
-                weapons[1].gameObject.SetActive(true);
-                if (katana_open.Length > 0)
-                {
-                    skill_Player.PlaySkill(grateSword_open[0], SkillEnd, RootMotionEvent);
+                    if (skillConfig.Length > i)
+                        skill_Player.PlaySkill(skillConfig[i], SkillEnd, RootMotionEvent);
                 }
             }
         }
@@ -111,6 +68,7 @@ public class TestPlayMode : MonoBehaviour
     {
         print("End");
         animation_Controller.PlaySingleAnimation(idleClip);
+        body.velocity = Vector3.zero;
     }
 
     public void RootMotionEvent(Vector3 pos, Quaternion rot, Vector3 velocity)

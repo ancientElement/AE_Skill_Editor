@@ -1329,7 +1329,8 @@ MonoBehaviour:
   skill_Player: {fileID: -7021259275281072095}
   skillConfig:
   - {fileID: 11400000, guid: e4354edfa18e4384da878e6ca3d1d06d, type: 2}
-  characterController: {fileID: -3593405290323802211}
+  characterController: {fileID: 0}
+  body: {fileID: 0}
   idleClip: {fileID: 2457295268609474640, guid: 7d11c62956b6c0543a0c4f11906ab61e, type: 3}
   weapons:
   - {fileID: 6048983915594536085}
@@ -1337,6 +1338,7 @@ MonoBehaviour:
   katana_open: []
   grateSword_open: []
   grativ: 0
+  useRigidBodyOrCharactorContrller: -1
 --- !u!1 &3905729449293096958
 GameObject:
   m_ObjectHideFlags: 0
@@ -2018,10 +2020,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1334920071556762566}
   - component: {fileID: 3734303308891332414}
-  - component: {fileID: -3593405290323802211}
   - component: {fileID: -7021259275281072095}
   - component: {fileID: 5783000843206997471}
-  m_Layer: 0
+  - component: {fileID: 7741621125789277784}
+  - component: {fileID: 5380660618986863943}
+  m_Layer: 6
   m_Name: Y Bot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2042,6 +2045,7 @@ Transform:
   m_Children:
   - {fileID: 3499682090031830174}
   - {fileID: 4323373325398740232}
+  - {fileID: 2484537471740393027}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2065,24 +2069,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!143 &-3593405290323802211
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6486239312877444709}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 1.8
-  m_Radius: 0.3
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!114 &-7021259275281072095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2108,6 +2094,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 3734303308891332414}
+--- !u!54 &7741621125789277784
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6486239312877444709}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &5380660618986863943
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6486239312877444709}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 1.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &6496357197546880320
 GameObject:
   m_ObjectHideFlags: 0
@@ -2317,6 +2333,37 @@ Transform:
   m_Children:
   - {fileID: 7307755224483317315}
   m_Father: {fileID: 7136679796492987447}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7375943678052503172
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2484537471740393027}
+  m_Layer: 0
+  m_Name: CameraPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2484537471740393027
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7375943678052503172}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.15, y: 1.49, z: 0.035063565}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1334920071556762566}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7661275563707621123
