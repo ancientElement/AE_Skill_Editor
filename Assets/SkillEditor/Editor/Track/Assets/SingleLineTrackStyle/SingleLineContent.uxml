@@ -1,3 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement name="AnimationTrackContent" style="flex-shrink: 0; height: 35px; width: 100%; background-color: rgb(42, 42, 42); -unity-slice-left: 1; -unity-slice-top: 1; -unity-slice-right: 1; -unity-slice-bottom: 1; margin-bottom: 2px; flex-direction: row; position: relative; border-top-width: 0.5px; border-bottom-width: 0.5px; border-left-color: rgb(34, 33, 33); border-right-color: rgb(34, 33, 33); border-top-color: rgb(34, 33, 33); border-bottom-color: rgb(34, 33, 33);" />
-</ui:UXML>

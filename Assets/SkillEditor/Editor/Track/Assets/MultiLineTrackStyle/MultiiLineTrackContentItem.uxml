@@ -1,3 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement name="MultiiLineTrackContentItem" style="height: 30px; width: 100%; background-color: rgb(42, 42, 42); border-left-color: rgb(34, 33, 33); border-right-color: rgb(34, 33, 33); border-top-color: rgb(34, 33, 33); border-bottom-color: rgb(34, 33, 33); border-top-width: 1px; border-bottom-width: 1px; position: absolute;" />
-</ui:UXML>

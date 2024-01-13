@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/AE_SkillEditor/Editor/Track/Assets/USS/Extend.uss?fileID=7433441132597879392&amp;guid=e9f808c51e2cdb643b06477e63a0d609&amp;type=3#Extend" />
+    <ui:Label display-tooltip-when-elided="true" name="EvenItemTrackItem" class="unity-label Extend-Label" style="height: 100%; width: 204px; background-color: rgba(255, 255, 255, 0); white-space: normal; -unity-text-align: middle-center; flex-direction: row; padding-right: 0; padding-left: 0; position: absolute; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-width: 0; border-right-width: 0; border-top-left-radius: 2px; border-bottom-left-radius: 2px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; border-top-width: 0; border-bottom-width: 0; font-size: 10px; color: rgb(0, 0, 0);">
+        <ui:IMGUIContainer name="EventItemIMGUIContainer" style="flex-grow: 1;">
+            <ui:Label text="EventNameLabel" display-tooltip-when-elided="true" name="EventNameLabel" style="flex-grow: 1; flex-shrink: 1; position: relative;" />
+        </ui:IMGUIContainer>
+    </ui:Label>
+</ui:UXML>

@@ -1,0 +1,85 @@
+﻿using System;
+using UnityEngine.UI;
+using ARPG_AE_JOKER;
+
+/// <summary>
+/// 多行轨道Event
+/// </summary>
+[Serializable]
+public class _Event类名CS : SkillMultiLineFrameEventBase
+{
+#if UNITY_EDITOR
+        public string TrackName = "_轨道名称中文";
+#endif
+    public int FrameIndex = -1;
+    public int FrameDuration = -1;
+    public _变化的对象类型 _变化的对象名;
+
+    /// <summary>
+    /// 子轨道名称
+    /// </summary>
+    /// <returns></returns>
+    public override string GetTrackName()
+    {
+        return TrackName;
+    }
+    public override void SetTrackName(string value)
+    {
+        TrackName = value;
+    }
+
+    /// <summary>
+    /// Item的起始帧
+    /// </summary>
+    /// <returns></returns>
+    public override int GetFrameIndex()
+    {
+        return FrameIndex;
+    }
+    public override void SetFrameIndex(int value)
+    {
+        FrameIndex = value;
+    }
+
+    /// <summary>
+    /// item的持续帧
+    /// </summary>
+    /// <param name="frameRate"></param>
+    /// <returns></returns>
+    public override int GetFrameDuration(int frameRate)
+    {
+        return FrameDuration;
+    }
+    public override void SetFrameDuration(int value)
+    {
+        FrameDuration = value;
+    }
+
+
+    /// <summary>
+    /// Object的name
+    /// </summary>
+    /// <returns></returns>
+    public override string GetName()
+    {
+        return "请修改";
+    }
+    public override void SetName(string value)
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// 获取Object
+    /// </summary>
+    /// <returns></returns>
+    public override object GetObject()
+    {
+        return _变化的对象名;
+    }
+    public override void SetObject(object value)
+    {
+        _变化的对象名 = value as _变化的对象类型;
+    }
+
+}

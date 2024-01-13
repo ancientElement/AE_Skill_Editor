@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/AE_SkillEditor/Editor/Track/Assets/USS/Extend.uss?fileID=7433441132597879392&amp;guid=e9f808c51e2cdb643b06477e63a0d609&amp;type=3#Extend" />
+    <ui:VisualElement name="MultiLineTrackMenuItem" style="flex-direction: row; height: 30px; align-items: center; margin-bottom: 2px; position: absolute; width: 100%; border-left-width: 1px; border-bottom-width: 1px; border-right-width: 0; border-left-color: rgb(19, 17, 17); border-right-color: rgb(19, 17, 17); border-top-color: rgb(19, 17, 17); border-bottom-color: rgb(19, 17, 17); border-top-width: 1px; top: 0; left: 0;">
+        <ui:Label text="≡" display-tooltip-when-elided="true" class="button_hover" style="height: 100%; -unity-text-align: middle-center; width: 20px; font-size: 15px; -unity-font-style: bold;" />
+        <ui:TextField picking-mode="Ignore" text="轨道" name="NameField" style="margin-left: 0; margin-right: 0; height: 20px; flex-grow: 0; margin-top: 0; margin-bottom: 0; width: 85%; flex-shrink: 1;" />
+        <ui:Button text="X" display-tooltip-when-elided="true" name="DleteButton" class="button_hover" style="width: auto; height: 100%; -unity-text-align: middle-center; position: relative; right: auto; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; font-size: 12px; flex-grow: 1; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; -unity-font-style: bold;" />
+    </ui:VisualElement>
+</ui:UXML>
