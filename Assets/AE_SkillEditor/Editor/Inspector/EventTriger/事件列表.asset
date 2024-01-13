@@ -15,4 +15,5 @@ MonoBehaviour:
   eventNameList:
   - StartInput
   - MixAnimation
-  - 
+  - LetGo
+  - StartNext

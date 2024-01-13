@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
 using Sirenix.Utilities;
+using static UnityEditor.Progress;
 
 namespace ARPG_AE_JOKER.SkillEditor
 {
@@ -86,7 +87,13 @@ namespace ARPG_AE_JOKER.SkillEditor
 
             EditorGUILayout.BeginVertical();
             //事件名
+            EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField(new GUIContent("事件名"));
+            if (GUILayout.Button("添加"))
+            {
+                helper.skillFrameEventBase.eventName.Add("请修改");
+            };
+            EditorGUILayout.EndHorizontal();
 
             System.Collections.Generic.List<string> list = helper.eventNames;
 
@@ -105,11 +112,15 @@ namespace ARPG_AE_JOKER.SkillEditor
                         //设置内容、勾选条件和点击回调
                         genericMenu.AddItem(new GUIContent(name), item == eventName, () =>
                         {
-                            Debug.Log(i);
                             helper.skillFrameEventBase.eventName[index] = item;
                             helper.OnValidate();
                         });
                     }
+                    genericMenu.AddItem(new GUIContent("删除"), false, () =>
+                    {
+                        helper.skillFrameEventBase.eventName.RemoveAt(index);
+                        helper.OnValidate();
+                    });
                     //显示菜单
                     genericMenu.ShowAsContext();
                 }
