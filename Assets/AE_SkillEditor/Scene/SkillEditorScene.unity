@@ -723,7 +723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aff51383132c172429ff57ad66379e31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  focus: {fileID: 0}
+  focus: {fileID: 537946272}
   distance: 5
   focusRadius: 1
   focusCentering: 0.5
