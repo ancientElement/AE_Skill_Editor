@@ -9,6 +9,24 @@
 - Addressable
 - URP(也可不用)
 
+## 运行时示例使用
+
+- 选择人物
+
+![image-20240117120741605](ImagesAssets/image-20240117120741605.png)
+
+- 配置技能
+
+![image-20240117120820583](ImagesAssets/image-20240117120820583.png)
+
+![image-20240117120901795](ImagesAssets/image-20240117120901795.png)
+
+- 开始运行
+
+- 点击任意数字键,按数字播放对应index的技能
+
+
+
 ## 轨道的播放
 
 可以参考`TestPlayMode.cs`和` TestAnimationPlayer.cs`
@@ -95,4 +113,4 @@
 
 ![image-20240117120125981](ImagesAssets/image-20240117120125981.png)
 
-这里的内容很多文档还没有整理完成
+这里的内容很多文档还没有整理完成,可以大概通过注释了解

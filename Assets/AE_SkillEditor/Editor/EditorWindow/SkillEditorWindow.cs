@@ -498,12 +498,10 @@ namespace ARPG_AE_JOKER.SkillEditor
 
             if (delta < 0)
             {
-                Debug.LogWarning("放大" + (skillEditorConfig.frameUniWidth - delta / 3));
                 skillEditorConfig.frameUniWidth = Mathf.Clamp(skillEditorConfig.frameUniWidth - delta / 3, 1, 10);
             }
             else
             {
-                Debug.LogWarning("缩小" + (skillEditorConfig.frameUniWidth - delta / 3));
                 skillEditorConfig.frameUniWidth = Mathf.Clamp(skillEditorConfig.frameUniWidth - delta / 3, 1, 4);
             }
 
