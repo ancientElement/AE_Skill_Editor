@@ -5,8 +5,9 @@
 ## 依赖
 
 - AE_Framework [ancientElement/AE_Framework (github.com)](https://github.com/ancientElement/AE_Framework) 轻量的游戏框架
-
 - AE_Animation_Playable [ancientElement/AE_Animation_Playable (github.com)](https://github.com/ancientElement/AE_Animation_Playable) 基于Playable 的动画系统
+- Addressable
+- URP(也可不用)
 
 ## 轨道的播放
 
