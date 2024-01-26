@@ -40,6 +40,9 @@ namespace ARPG_AE_JOKER.SkillEditor
 
             //重置当前矩阵
             Handles.matrix = oldMat;
+
+            Gizmos.color = new Color(1, 0, 0, 0.5f);
+            Gizmos.DrawMesh(mesh,transform.localPosition,transform.localRotation);
         }
 
         public override void ResetData()
@@ -53,10 +56,10 @@ namespace ARPG_AE_JOKER.SkillEditor
             base.Init(detectionParamsBase);
             this.ringLikeDetectionParams = (RingLikeDetectionParams)detectionParamsBase;
             if (isDebuge)
-                DrawMesh(meshFilter);
+                CreatMesh();
         }
 
-        public override void DrawMesh(MeshFilter meshFilter)
+        public override void CreatMesh()
         {
             if (ringLikeDetectionParams == null) return;
 
@@ -74,8 +77,6 @@ namespace ARPG_AE_JOKER.SkillEditor
               ringLikeDetectionParams.thetaLength,
               ringLikeDetectionParams.height
             );
-
-            meshFilter.mesh = this.mesh;
         }
 
         public void Detection(DetectionParamsBase detectionParamsBase)

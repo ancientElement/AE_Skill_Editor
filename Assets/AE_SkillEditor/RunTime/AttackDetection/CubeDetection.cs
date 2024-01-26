@@ -15,7 +15,7 @@ namespace ARPG_AE_JOKER.SkillEditor
             base.Init(detectionParamsBase);
             this.cubeDetectionParams = (CubeDetectionParams)detectionParamsBase;
             if (isDebuge)
-                DrawMesh(meshFilter);
+                CreatMesh();
         }
 
         [SerializeField] Collider[] detectionResult;
@@ -42,8 +42,10 @@ namespace ARPG_AE_JOKER.SkillEditor
             //这里的center是相对目标中心而言，因为旋转cube与目标位置相同所以是zero
             Handles.color = Color.green;
             Handles.DrawWireCube(transform.InverseTransformPoint(boxCenter), halfExtents * 2);
-            //重置当前矩阵
             Handles.matrix = oldMat;
+
+            Gizmos.color = new Color(1, 0, 0, 0.5f);
+            Gizmos.DrawMesh(mesh, transform.localPosition, transform.localRotation);
         }
 
         public void Detection(DetectionParamsBase detectionParamsBase)
@@ -65,11 +67,10 @@ namespace ARPG_AE_JOKER.SkillEditor
             detectionResult = temp_detectionResult;
         }
 
-        public override void DrawMesh(MeshFilter meshFilter)
+        public override void CreatMesh()
         {
             if (cubeDetectionParams == null) return;
-
-            this.mesh = CubeBuilder.Build(
+            mesh = CubeBuilder.Build(
                   this.cubeDetectionParams.width,
                   this.cubeDetectionParams.height,
                   this.cubeDetectionParams.depth,
@@ -77,8 +78,6 @@ namespace ARPG_AE_JOKER.SkillEditor
                   this.cubeDetectionParams.heightSegments,
                   this.cubeDetectionParams.depthSegments
                 );
-
-            meshFilter.mesh = this.mesh;
         }
 
         public override void ResetData()

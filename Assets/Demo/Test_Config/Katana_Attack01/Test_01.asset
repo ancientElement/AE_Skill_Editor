@@ -58,13 +58,13 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 3
     - Name: 
       Entry: 7
       Data: 
     - Name: $k
       Entry: 3
-      Data: 7
+      Data: 6
     - Name: $v
       Entry: 7
       Data: 5|ARPG_AE_JOKER.SkillEditor.EventTrigerEvent, Assembly-CSharp
@@ -101,6 +101,108 @@ MonoBehaviour:
     - Name: 
       Entry: 4
       Data: 0.5
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 16
+    - Name: $v
+      Entry: 7
+      Data: 7|ARPG_AE_JOKER.SkillEditor.EventTrigerEvent, Assembly-CSharp
+    - Name: FrameDuration
+      Entry: 3
+      Data: 1
+    - Name: eventName
+      Entry: 7
+      Data: 8|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 1
+      Data: "\u8BF7\u547D\u540D"
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: color
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0.5
+    - Name: 
+      Entry: 4
+      Data: 0.5
+    - Name: 
+      Entry: 4
+      Data: 0.5
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 11
+    - Name: $v
+      Entry: 7
+      Data: 9|ARPG_AE_JOKER.SkillEditor.EventTrigerEvent, Assembly-CSharp
+    - Name: FrameDuration
+      Entry: 3
+      Data: 1
+    - Name: eventName
+      Entry: 7
+      Data: 10|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 1
+      Data: "\u8BF7\u547D\u540D"
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: color
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0.607441366
+    - Name: 
+      Entry: 4
+      Data: 0.8962264
+    - Name: 
+      Entry: 4
+      Data: 0.07947663
     - Name: 
       Entry: 4
       Data: 1

@@ -15,7 +15,7 @@ namespace ARPG_AE_JOKER.SkillEditor
             base.Init(detectionParamsBase);
             this.sphereDetectionParams = (SphereDetectionParams)detectionParamsBase;
             if (isDebuge)
-                DrawMesh(meshFilter);
+                CreatMesh();
         }
 
         [SerializeField] Collider[] detectionResult;
@@ -36,6 +36,9 @@ namespace ARPG_AE_JOKER.SkillEditor
             Handles.DrawWireDisc(sphereCenter, Vector3.up, raduis);
             Handles.DrawWireDisc(sphereCenter, Vector3.right, raduis);
             Handles.DrawWireDisc(sphereCenter, Vector3.forward, raduis);
+
+            Gizmos.color = new Color(1, 0, 0, 0.5f);
+            Gizmos.DrawMesh(mesh, transform.localPosition, transform.localRotation);
         }
 
         public void Detection(DetectionParamsBase detectionParamsBase)
@@ -59,17 +62,15 @@ namespace ARPG_AE_JOKER.SkillEditor
             detectionResult = temp_detectionResult;
         }
 
-        public override void DrawMesh(MeshFilter meshFilter)
+        public override void CreatMesh()
         {
             if (sphereDetectionParams == null) return;
 
-            this.mesh = SphereBuilder.Build(
+            mesh = SphereBuilder.Build(
               sphereDetectionParams.radius,
               sphereDetectionParams.lonSegments,
               sphereDetectionParams.latSegments
             );
-
-            meshFilter.mesh = this.mesh;
         }
 
         public override void ResetData()

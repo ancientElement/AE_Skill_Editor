@@ -134,7 +134,7 @@ namespace ARPG_AE_JOKER.SkillEditor
 
         #region 顶部
 
-        private const string skillEditorScenePath = "Assets/AE_SkillEditor/Scene/SkillEditorScene.unity";
+        private const string skillEditorScenePath = "Assets/AE_SkillEditor/Editor/Scene/SkillEditorScene.unity";
         private const string priviewGameObjectPath = "PreviewCharacterRoot";
         private string oldScenePath;
 

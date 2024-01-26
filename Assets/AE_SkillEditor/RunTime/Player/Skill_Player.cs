@@ -7,7 +7,7 @@ namespace ARPG_AE_JOKER.SkillEditor
     public interface ISkillAnimationPlayer
     {
         public void PlayAnimation(string name, AnimationClip animationClip, float enterTIme);
-       public void  TrigerAnimationEvent(string eventName);
+        public void TrigerAnimationEvent(string eventName);
         public void ApplayRootMotion();
         public void PreventRootMotion();
     }
