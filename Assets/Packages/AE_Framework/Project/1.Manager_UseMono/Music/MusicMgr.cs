@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,15 +6,12 @@ namespace AE_Framework
 {
     public class MusicMgr : SingletonMonoMgr<MusicMgr>
     {
-        [SerializeField] private GameObject Music_base; //音效挂载的游戏对象
+        [SerializeField] private GameObject MusicRoot; //音效挂载的游戏对象
 
         private AudioSource bkMusic; //背景音乐组件
         [SerializeField] private float bkVolume = 0.5f; //背景音乐音量
 
         private List<AudioSource> soundMusicList = new List<AudioSource>(); //音效组件
-
-        //Resources下的加载文件夹
-        private static readonly string AudioSourceResourcesDir = "AudioSource";
 
         /// <summary>
         /// 改变背景音乐音量
@@ -36,10 +32,12 @@ namespace AE_Framework
         /// <param name="isLoop"></param>
         /// <param name="spatialBlend"></param>
         /// <param name="mute"></param>
-        private void SetAudioSource(AudioSource audioSource, AudioClip audioClip, bool isLoop = false,
+        private void SetAudioSource(AudioSource audioSource, AudioClip audioClip, float time, bool isLoop = false,
             float spatialBlend = 0, bool mute = false, float volumn = 0.5f)
         {
             audioSource.clip = audioClip;
+            //设置时间
+            audioSource.time = time;
             //设置音量
             audioSource.volume = Mathf.Clamp01(volumn);
             //设置音乐片段是否循环
@@ -56,17 +54,14 @@ namespace AE_Framework
         /// 播放背景音乐
         /// </summary>
         /// <param name="name"></param>
-        public void PlayBKMusic(string name)
+        public void PlayBKMusic(AudioClip audioClip)
         {
             //播放背景音乐
-            //bkMusic为空则为bkMusic创建挂载的空对象
-            //异步加载后播放
             if (bkMusic == null)
             {
-                bkMusic = Music_base.AddComponent<AudioSource>();
+                bkMusic = MusicRoot.AddComponent<AudioSource>();
             }
-
-            SetAudioSource(bkMusic, ResMgr.AddressableLoad<AudioClip>(name), isLoop: true);
+            SetAudioSource(bkMusic, audioClip, 0f, isLoop: true);
             bkMusic.Play();
         }
 
@@ -88,7 +83,6 @@ namespace AE_Framework
             if (bkMusic == null) return;
             bkMusic.Stop();
             //释放资源
-            ResMgr.Release(bkMusic.clip);
             bkMusic.clip = null;
         }
 
@@ -97,110 +91,20 @@ namespace AE_Framework
         #region 音效
 
         /// <summary>
-        /// 停止音效
-        /// </summary>
-        /// <param name="audioSource"></param>
-        public void StopSoundMusic(AudioSource audioSource)
-        {
-            if (soundMusicList.Contains(audioSource))
-            {
-                GameObject.Destroy(audioSource);
-                //Debug.Log(audioSource);
-                soundMusicList.Remove(audioSource);
-                //Debug.Log(audioSource);
-                audioSource.Stop();
-            }
-        }
-
-        /// <summary>
         /// 播放音效
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="isLoop"></param>
-        /// <param name="callback"></param>
-        public void PlaySoundMusic(string name, bool isLoop = false, Action<AudioSource> callback = null,
-            float spatialBlend = 0, bool mute = false, float volumn = 0.5f)
+        public AudioSource PlaySoundMusic(AudioClip audioClip, float time = 0f, bool isLoop = false,
+            float spatialBlend = 0f, bool mute = false, float volumn = 0.5f)
         {
-            //音效加载完后
-            ODPlaySoundMusic(ResMgr.AddressableLoad<AudioClip>(name), callback, isLoop, spatialBlend, mute,
-                volumn);
-        }
-
-        /// <summary>
-        /// 播放音效 3D
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="isLoop"></param>
-        /// <param name="callback"></param>
-        public void PlaySoundMusic(string name, Vector3 worldPosition, Action<AudioSource> callback = null,
-            bool isLoop = false, float spatialBlend = 0, bool mute = false, float volumn = 0.5f)
-        {
-            //音效加载完后
-            ODPlaySoundMusic(ResMgr.AddressableLoad<AudioClip>(name), worldPosition, callback, isLoop,
-                spatialBlend,
-                mute);
-        }
-
-        /// <summary>
-        /// 播放音效
-        /// </summary>
-        public void PlaySoundMusic(AudioClip audioClip, bool isLoop = false, Action<AudioSource> callback = null,
-            float spatialBlend = 0, bool mute = false, float volumn = 0.5f)
-        {
-            ODPlaySoundMusic(audioClip, callback, isLoop, spatialBlend, mute, volumn);
-        }
-
-        /// <summary>
-        /// 播放音效 3D
-        /// </summary>
-        public void PlaySoundMusic(AudioClip audioClip, Vector3 worldPosition, Action<AudioSource> callback = null,
-            bool isLoop = false, float spatialBlend = 0, bool mute = false, float volumn = 0.5f)
-        {
-            //音效加载完后
-            ODPlaySoundMusic(audioClip, worldPosition, callback, isLoop, spatialBlend, mute, volumn);
-        }
-
-        /// <summary>
-        /// 播放音效逻辑
-        /// </summary>
-        /// <param name="audioClip"></param>
-        /// <param name="worldPosition"></param>
-        /// <param name="isLoop"></param>
-        /// <param name="callback"></param>
-        private void ODPlaySoundMusic(AudioClip audioClip, Action<AudioSource> callback = null,
-            bool isLoop = false, float spatialBlend = 0, bool mute = false, float volumn = 0.5f)
-        {
-            GameObject obj = PoolMgr.GetGameObj("AudioSource");
-            AudioSource audioSource = obj.GetComponent<AudioSource>();
+            AudioSource audioSource = MusicRoot.AddComponent<AudioSource>();
             //添加进soundMusicList
             soundMusicList.Add(audioSource);
             //设置音效
-            SetAudioSource(audioSource, audioClip, isLoop, spatialBlend, mute, volumn);
+            SetAudioSource(audioSource, audioClip, time, isLoop, spatialBlend, mute, volumn);
             audioSource.Play();
             //协程回收AudioSource
-            StartCoroutine(RecycleAudioSource(audioClip, obj, audioSource));
-        }
-
-        /// <summary>
-        /// 播放音效逻辑 3D
-        /// </summary>
-        /// <param name="audioClip"></param>
-        /// <param name="worldPosition"></param>
-        /// <param name="isLoop"></param>
-        /// <param name="callback"></param>
-        private void ODPlaySoundMusic(AudioClip audioClip, Vector3 worldPosition,
-            Action<AudioSource> callback = null, bool isLoop = false, float spatialBlend = 0, bool mute = false,
-            float volumn = 0.5f)
-        {
-            GameObject obj = PoolMgr.GetGameObj(AudioSourceResourcesDir, worldPosition, Quaternion.identity);
-            AudioSource audioSource = obj.GetComponent<AudioSource>();
-            //添加进soundMusicList
-            soundMusicList.Add(audioSource);
-            //设置音效
-            SetAudioSource(audioSource, audioClip, isLoop, spatialBlend, mute, volumn);
-            audioSource.Play();
-            //协程回收AudioSource
-            StartCoroutine(RecycleAudioSource(audioClip, obj, audioSource));
+            StartCoroutine(RecycleAudioSource(audioClip, audioSource));
+            return audioSource;
         }
 
         /// <summary>
@@ -212,39 +116,15 @@ namespace AE_Framework
         /// <param name="callback"></param>
         /// <param name="time"></param>
         /// <returns></returns>
-        private IEnumerator RecycleAudioSource(AudioClip audioClip, GameObject obj, AudioSource audioSource,
-            Action<AudioSource> callback = null, float time = 0f)
+        private IEnumerator RecycleAudioSource(AudioClip audioClip, AudioSource audioSource)
         {
             // 延迟 Clip的长度（秒）
             yield return new WaitForSeconds(audioClip.length);
-            yield return new WaitForSeconds(time);
-            //可能外部需要拿到AudioSource做一些操作
-            //用回调放回source
-            callback?.Invoke(audioSource);
-            if (obj != null)
-            {
-                // 移除引用 放回池子
-                PoolMgr.PushGameObj("AudioSource", obj);
-            }
+            audioSource.Stop();
+            soundMusicList.Remove(audioSource);
+            GameObject.Destroy(audioSource);
         }
 
         #endregion 音效
-
-        /// <summary>
-        /// 释放所有AudioSource
-        /// </summary>
-        public void ClearAllAudioSource()
-        {
-            if (soundMusicList.Count == 0) return;
-
-            for (int i = soundMusicList.Count - 1; i >= 0; i--)
-            {
-                ResMgr.Release(soundMusicList[i].clip);
-                ResMgr.ReleaseInstance(soundMusicList[i].gameObject);
-                soundMusicList.RemoveAt(i);
-            }
-
-            PoolMgr.ClearGameObject("AudioSource");
-        }
     }
 }

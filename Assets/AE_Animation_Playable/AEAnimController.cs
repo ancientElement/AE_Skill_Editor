@@ -25,12 +25,32 @@ namespace AE_Animation_Playable
 
         private bool m_rootmotion;
 
-        private Rigidbody m_body;
+        //[Obsolete]private Rigidbody m_body;
+        private CharacterController m_characterController;
+
         private Transform m_modle;
 
         private MonoBehaviour m_owner;
 
-        public AEAnimController(MonoBehaviour owner, Animator animator, Transform modle, Rigidbody body)
+        //[Obsolete]
+        //public AEAnimController(MonoBehaviour owner, Animator animator, Transform modle, Rigidbody body)
+        //{
+        //    m_owner = owner;
+
+        //    m_graph = PlayableGraph.Create();
+        //    m_mixer = new Mixer(m_graph);
+        //    m_animMap2Int = new Dictionary<string, int>();
+
+        //    m_animMap = new Dictionary<string, AnimBehaviour>();
+        //    m_blendTree1DMap = new Dictionary<string, BlendTree1D>();
+        //    m_blendTree2DMap = new Dictionary<string, BlendTree2D>();
+
+        //    m_animator = animator;
+        //    m_modle = modle;
+        //    m_body = body;
+        //}
+
+        public AEAnimController(MonoBehaviour owner, Animator animator, Transform modle, CharacterController characterController)
         {
             m_owner = owner;
 
@@ -44,9 +64,7 @@ namespace AE_Animation_Playable
 
             m_animator = animator;
             m_modle = modle;
-            m_body = body;
-
-            AddAnimator("Animator", 0.2f);
+            m_characterController = characterController;
         }
 
         public void Start()
@@ -60,7 +78,8 @@ namespace AE_Animation_Playable
             m_graph.Destroy();
         }
 
-        #region  过渡
+        #region 过渡
+
         public void TransitionTo(string name, Action callback = null, float enterTIme = -1f, float animationClipLength = -1f)
         {
             if (enterTIme != -1f)
@@ -95,9 +114,11 @@ namespace AE_Animation_Playable
             callback?.Invoke();
             yield break;
         }
-        #endregion
 
-        #region  添加动画节点
+        #endregion 过渡
+
+        #region 添加动画节点
+
         //添加Animator
         public void AddAnimator(string name, float enterTIme)
         {
@@ -138,15 +159,26 @@ namespace AE_Animation_Playable
             m_animMap2Int.Add(name, m_mixer.inputCount - 1);
             m_animMap.Add(name, behaviour);
         }
-        #endregion
+
+        #endregion 添加动画节点
 
         #region BlendTree
+
         public void BlendTree1DSetValue(string name, float value)
         {
             if (m_blendTree1DMap.TryGetValue(name, out BlendTree1D blendTree1D))
             {
                 blendTree1D.SetValue(value);
             }
+        }
+
+        public float BlendTree1DGetValue(string name)
+        {
+            if (m_blendTree1DMap.TryGetValue(name, out BlendTree1D blendTree1D))
+            {
+                return blendTree1D.CurrentValue;
+            }
+            return 0f;
         }
 
         public void BlendClipTree2DSetPointer(string name, Vector2 value)
@@ -156,9 +188,11 @@ namespace AE_Animation_Playable
                 blendTree2D.SetPointer(value);
             }
         }
-        #endregion
 
-        #region  AnimatonMixer
+        #endregion BlendTree
+
+        #region AnimatonMixer
+
         public void AnimatorCroosFade(string stateName, float transitionDuration, Action callback = null)
         {
             TransitionTo("Animator");
@@ -172,18 +206,29 @@ namespace AE_Animation_Playable
                 m_animationCroosFadeCallback = m_owner.StartCoroutine(AnimationCroosFadeEnumerator(m_animMixAnimator.GetAnimLength(0), callback));
             }
         }
+
         private IEnumerator AnimationCroosFadeEnumerator(float time, Action callback)
         {
             yield return new WaitForSeconds(time);
             callback?.Invoke();
         }
-        public void AnimatorSetFloat(string name, float value) { m_animMixAnimator.SetFloat(name, value); }
-        public void AnimatorSetBool(string name, bool value) { m_animMixAnimator.SetBool(name, value); }
-        public void AnimatorSetTrigger(string name) { m_animMixAnimator.SetTrigger(name); }
-        public float AnimatorGetAnimLength(int layer) { return m_animMixAnimator.GetAnimLength(layer); }
-        #endregion
 
-        #region  RootMotion
+        public void AnimatorSetFloat(string name, float value)
+        { m_animMixAnimator.SetFloat(name, value); }
+
+        public void AnimatorSetBool(string name, bool value)
+        { m_animMixAnimator.SetBool(name, value); }
+
+        public void AnimatorSetTrigger(string name)
+        { m_animMixAnimator.SetTrigger(name); }
+
+        public float AnimatorGetAnimLength(int layer)
+        { return m_animMixAnimator.GetAnimLength(layer); }
+
+        #endregion AnimatonMixer
+
+        #region RootMotion
+
         public void OnAnimatorMove()
         {
             if (m_rootmotion)
@@ -191,7 +236,6 @@ namespace AE_Animation_Playable
                 Move(m_animator.deltaPosition, m_animator.velocity, m_animator.deltaRotation);
             }
         }
-
 
         public void ApplayRootMotion()
         {
@@ -206,13 +250,14 @@ namespace AE_Animation_Playable
         protected void Move(Vector3 deltaPosition, Vector3 velocity, Quaternion deltaRotation)
         {
             // 设置速度
-            // m_characterController.Move(deltaPosition);
-            m_body.velocity = velocity;
+            m_characterController.Move(deltaPosition);
+            //m_body.velocity = velocity;
 
             // 通过将刚体的角度设置为当前角度加上增量旋转
             m_modle.transform.rotation *= deltaRotation;
         }
-        #endregion
+
+        #endregion RootMotion
 
         //获取当前动画播放长度
         public float GetAnimLength(string name)
@@ -225,4 +270,3 @@ namespace AE_Animation_Playable
         }
     }
 }
-

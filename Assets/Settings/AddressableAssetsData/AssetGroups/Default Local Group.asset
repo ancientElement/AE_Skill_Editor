@@ -21,10 +21,6 @@ MonoBehaviour:
     m_Address: Cube
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: ef6537f8d292ff442b8e6111c34a4507
-    m_Address: AudioSource
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 995c794c3c3d81445921a0153100080f, type: 2}
   m_SchemaSet:

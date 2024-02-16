@@ -18,7 +18,7 @@ namespace ARPG_AE_JOKER.SkillEditor
                         if (effectEvent.FrameIndex == currentFrameIndex)
                         {
                             //实例化特效
-                            GameObject effct = PoolMgr.GetGameObjNotInRes(effectEvent.EffectObject.name);
+                            GameObject effct = PoolMgr.GetGameObj(effectEvent.EffectObject.name);
 
                             if (effct == null)
                             {

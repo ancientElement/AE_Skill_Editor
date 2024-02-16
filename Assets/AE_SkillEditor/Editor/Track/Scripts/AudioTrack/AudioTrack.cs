@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Palmmedia.ReportGenerator.Core.Reporting.Builders;
+using System.Collections;
 using Unity.EditorCoroutines.Editor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -14,9 +15,9 @@ namespace ARPG_AE_JOKER.SkillEditor
             {
                 if (audioSouceGameObj == null)
                 {
-                    audioSouceGameObj = GameObject.Find("AudioSouceGameObj");
+                    audioSouceGameObj = GameObject.Find("====SkillEditorAudioSouceGameObj====");
                     if (audioSouceGameObj == null)
-                        audioSouceGameObj = new GameObject("AudioSouceGameObj");
+                        audioSouceGameObj = new GameObject("====SkillEditorAudioSouceGameObj====");
                 }
                 return audioSouceGameObj;
             }
@@ -29,6 +30,11 @@ namespace ARPG_AE_JOKER.SkillEditor
             base.Init(menuParent, trackParent, frameWidth, m_Data, name);
 
 
+        }
+
+        public override void ClearScene()
+        {
+            GameObject.DestroyImmediate(AudioSouceGameObj);
         }
 
         #region 预览

@@ -6,7 +6,7 @@ namespace ARPG_AE_JOKER.SkillEditor
 {
     public class AttackDetectionDriver
     {
-        public static void Driver(SkillMultiLineTrackDataBase<AttackDetectionEvent> attackDetectionData, int currentFrameIndex, Transform modelTransfrom,int frameRate)
+        public static void Driver(SkillMultiLineTrackDataBase<AttackDetectionEvent> attackDetectionData, int currentFrameIndex, Transform modelTransfrom,int frameRate,bool debugMode)
         {
             if (attackDetectionData != null)
             {
@@ -21,7 +21,7 @@ namespace ARPG_AE_JOKER.SkillEditor
                             GameObject attackDetectionObj;
 
                             //实例化特效
-                            attackDetectionObj = PoolMgr.GetGameObjNotInRes(name);
+                            attackDetectionObj = PoolMgr.GetGameObj(name);
 
                             AttackDetectionBase demo;
 

@@ -14,21 +14,16 @@ namespace ARPG_AE_JOKER.SkillEditor
         {
             get
             {
-                if (SkillEditorWindow.Instance.isOnEditorScene)
+                if (_tempEffectPriview == null)
                 {
+                    _tempEffectPriview = GameObject.Find("====SkillEditorEffect====");
                     if (_tempEffectPriview == null)
                     {
-                        _tempEffectPriview = GameObject.Find("Effects");
-                        if(_tempEffectPriview == null)
-                        {
-                            _tempEffectPriview = new GameObject("Effects");
-                            _tempEffectPriview.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
-                        }
+                        _tempEffectPriview = new GameObject("====SkillEditorEffect====");
+                        _tempEffectPriview.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
                     }
-                    return _tempEffectPriview;
                 }
-                Debug.LogWarning("不在编辑器场景下");
-                return null;
+                return _tempEffectPriview;
             }
             private set { _tempEffectPriview = value; }
         }
@@ -63,11 +58,7 @@ namespace ARPG_AE_JOKER.SkillEditor
 
         public override void ClearScene()
         {
-            base.ClearScene();
-            for (int i = TempEffectPriview.transform.childCount - 1; i >= 0; i--)
-            {
-                GameObject.DestroyImmediate(TempEffectPriview.transform.GetChild(i).gameObject);
-            }
+            GameObject.DestroyImmediate(TempEffectPriview);
         }
     }
 }

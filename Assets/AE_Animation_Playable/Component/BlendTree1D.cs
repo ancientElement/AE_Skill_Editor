@@ -19,6 +19,7 @@ namespace AE_Animation_Playable
         private float[] m_thresholds;
         private int m_clipCount;
         private float m_currentValue;
+        public float CurrentValue => m_currentValue;
 
         public BlendTree1D(PlayableGraph grapha, BlendClip1D[] blendClip1Ds, float enterTime = 0) : base(grapha, enterTime)
         {

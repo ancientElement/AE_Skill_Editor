@@ -8,6 +8,8 @@ using UnityEngine.UIElements;
 using System.Collections.Generic;
 using UnityEditor.SceneManagement;
 using Unity.EditorCoroutines.Editor;
+using UnityEngine.SceneManagement;
+using static UnityEditor.PlayerSettings;
 
 namespace ARPG_AE_JOKER.SkillEditor
 {
@@ -134,17 +136,11 @@ namespace ARPG_AE_JOKER.SkillEditor
 
         #region 顶部
 
-        private const string skillEditorScenePath = "Assets/AE_SkillEditor/Editor/Scene/SkillEditorScene.unity";
-        private const string priviewGameObjectPath = "PreviewCharacterRoot";
         private string oldScenePath;
-
-        private ToolbarButton LoadEditorSceneButton;
 
         private ToolbarButton SkillBasicButton;
 
         private ToolbarButton CreateSkillTrackButton;
-
-        private DropdownField SelectSceneDrapDown;
 
         private ObjectField PreviewCharacterPrefabObjectField;
         private ObjectField SkillConfigObjectField;
@@ -154,24 +150,12 @@ namespace ARPG_AE_JOKER.SkillEditor
         private Toggle AutoSaveToggle;
 
         private GameObject currentPreviewGameObject;
-        private GameObject currentPreviewGameObjectPrefab;
         public GameObject CurrentPreviewGameObject { get => currentPreviewGameObject; }
-
-        public bool isOnEditorScene
-        { get { return EditorSceneManager.GetActiveScene().path == skillEditorScenePath; } }
 
         private void InitTopMenu()
         {
-            LoadEditorSceneButton = root.Q<ToolbarButton>(nameof(LoadEditorSceneButton));
-            LoadEditorSceneButton.clicked += LoadEditorSceneButtonClick;
-
-            SelectSceneDrapDown = root.Q<DropdownField>(nameof(SelectSceneDrapDown));
-            SelectSceneDrapDown.choices.Clear();
-
             PreviewCharacterGONameLabel = root.Q<Label>(nameof(PreviewCharacterGONameLabel));
             SkillConfigNameLabel = root.Q<Label>(nameof(SkillConfigNameLabel));
-
-            SelectSceneDrapDown.RegisterValueChangedCallback(LoadScene);
 
             SkillBasicButton = root.Q<ToolbarButton>(nameof(SkillBasicButton));
             SkillBasicButton.clicked += SkillBasicButtonClick;
@@ -198,26 +182,8 @@ namespace ARPG_AE_JOKER.SkillEditor
             }
             if (currentPreviewGameObject != null)
             {
-                PreviewCharacterGONameLabel.text = currentPreviewGameObjectPrefab.name;
+                PreviewCharacterGONameLabel.text = CurrentPreviewGameObject.name;
             }
-
-            //选择场景初始化
-            foreach (UnityEditor.EditorBuildSettingsScene S in UnityEditor.EditorBuildSettings.scenes)
-            {
-                string scenesName = S.path;
-                string[] Name = scenesName.Split('/');
-                foreach (var item in Name)
-                {
-                    if (item.Contains(".unity"))
-                    {
-                        SelectSceneDrapDown.choices.Add(item);
-                    }
-                }
-            }
-
-#if UNITY_EDITOR
-            ReLoadPrefab();
-#endif
         }
 
         private void OpenCreateTrackWindow()
@@ -271,48 +237,7 @@ namespace ARPG_AE_JOKER.SkillEditor
             //避免其他场景
             if (evt.newValue != evt.previousValue)
             {
-                string current = EditorSceneManager.GetActiveScene().path;
-                if (current == skillEditorScenePath)
-                {
-                    //有预览对象 销毁
-                    if (currentPreviewGameObject != null)
-                    {
-                        DestroyImmediate(currentPreviewGameObject);
-                    }
-
-                    //没有 销毁跟对象的子对象
-                    Transform priviewRoot = GameObject.Find(priviewGameObjectPath).transform;
-                    if (priviewRoot != null && priviewRoot.childCount > 0)
-                    {
-                        DestroyImmediate(priviewRoot.GetChild(0).gameObject);
-                    }
-
-                    //生成新物体
-                    if (evt.newValue != null)
-                    {
-                        currentPreviewGameObject = Instantiate(evt.newValue as GameObject, priviewRoot);
-                        currentPreviewGameObject.transform.localRotation = Quaternion.identity;
-                        PreviewCharacterGONameLabel.text = currentPreviewGameObject.name;
-                    }
-                    currentPreviewGameObjectPrefab = evt.newValue as GameObject;
-                }
-            }
-        }
-
-        /// <summary>
-        /// 加载编辑器场景
-        /// </summary>
-        private void LoadEditorSceneButtonClick()
-        {
-            string current = EditorSceneManager.GetActiveScene().path;
-            //非编辑器场景,加载
-            if (current != skillEditorScenePath)
-            {
-                oldScenePath = current;
-                EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
-                EditorSceneManager.OpenScene(skillEditorScenePath);
-                ReLoadPrefab();
-                SelectSceneDrapDown.value = "";
+                currentPreviewGameObject = evt.newValue as GameObject;
             }
         }
 
@@ -376,33 +301,6 @@ namespace ARPG_AE_JOKER.SkillEditor
                 //unity聚焦
                 Selection.activeObject = skillConfig;
             }
-        }
-
-        /// <summary>
-        /// 恢复之前的prefab
-        /// </summary>
-        private void ReLoadPrefab()
-        {
-            if (EditorSceneManager.GetActiveScene().path == skillEditorScenePath)
-                if (currentPreviewGameObjectPrefab != null)
-                {
-                    PreviewCharacterPrefabObjectField.value = currentPreviewGameObjectPrefab;
-                    //有预览对象 销毁
-                    if (currentPreviewGameObject != null)
-                    {
-                        DestroyImmediate(currentPreviewGameObject);
-                    }
-
-                    //没有 销毁跟对象的子对象
-                    Transform priviewRoot = GameObject.Find(priviewGameObjectPath).transform;
-                    if (priviewRoot != null && priviewRoot.childCount > 0)
-                    {
-                        DestroyImmediate(priviewRoot.GetChild(0).gameObject);
-                    }
-                    //生成新物体
-                    currentPreviewGameObject = Instantiate(currentPreviewGameObjectPrefab, priviewRoot);
-                    currentPreviewGameObject.transform.localRotation = Quaternion.identity;
-                }
         }
 
         #endregion 顶部菜单
@@ -796,18 +694,32 @@ namespace ARPG_AE_JOKER.SkillEditor
         private VisualElement ContentListView;//右侧内容
         private VisualElement TrackMenuParent;//轨道菜单
         private ScrollView MainContentView;   //右侧滑动
+        private ScrollView TrackMenuScrollView;   //左侧侧滑动
 
         private List<TrackBase> trackList = new List<TrackBase>();
 
+
         /// <summary>
-        /// 同步左右上下滑动
+        /// 左侧允许上下滑动,并且同步左右
         /// </summary>
         /// <param name="value"></param>
-        private void MainContentViewVerticalValueChanged(float value)
+        private void TrackMenuScrollViewVerticalValueChanged(float value)
         {
-            Vector3 pos = TrackMenuParent.transform.position;
-            pos.y = contentContainer.transform.position.y;
-            TrackMenuParent.transform.position = pos;
+            Vector2 pos = MainContentView.scrollOffset;
+            pos.y = TrackMenuScrollView.scrollOffset.y;
+            MainContentView.scrollOffset = pos;
+        }
+
+        /// <summary>
+        /// 滚轮右侧左右移动
+        /// </summary>
+        /// <param name="evt"></param>
+        private void MainContentViewScollViewEvent(WheelEvent evt)
+        {
+            Vector2 pos = MainContentView.scrollOffset;
+            pos.y = TrackMenuScrollView.scrollOffset.y;
+            pos.x += evt.delta.y * 5f;
+            MainContentView.scrollOffset = pos;
         }
 
         /// <summary>
@@ -827,7 +739,11 @@ namespace ARPG_AE_JOKER.SkillEditor
             ContentListView = root.Q<VisualElement>("ContentListView");
             TrackMenuParent = root.Q<VisualElement>("TrackMenuList");
             MainContentView = root.Q<ScrollView>("MainContentView");
-            MainContentView.verticalScroller.valueChanged += MainContentViewVerticalValueChanged;
+            TrackMenuScrollView = root.Q<ScrollView>("TrackMenuScrollView");
+            MainContentView = root.Q<ScrollView>("MainContentView");
+            TrackMenuScrollView.verticalScroller.valueChanged += TrackMenuScrollViewVerticalValueChanged;
+            MainContentView.RegisterCallback<WheelEvent>(MainContentViewScollViewEvent);
+
             UpdateContentSise();
             InitTrack();
         }
@@ -1005,6 +921,13 @@ namespace ARPG_AE_JOKER.SkillEditor
             {
                 item.UnSelectAll();
             }
+        }
+
+        private void OnSelectionChange()
+        {
+            SkillConfig skillConfig = Selection.activeObject as SkillConfig;
+            if (skillConfig != null)
+                SkillConfigObjectField.value = skillConfig;
         }
     }
 }

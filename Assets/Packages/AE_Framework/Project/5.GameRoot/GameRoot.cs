@@ -1,70 +1,68 @@
-using Sirenix.OdinInspector;
-using UnityEditor;
-using UnityEngine;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace AE_Framework
 {
-    public class GameRoot : SingletonMonobehaviour<GameRoot>
+    public class GameRoot : SingletonMonoMgr<GameRoot>
     {
-        /// <summary>
-        /// 框架设置
-        /// </summary>
-        [LabelText("框架设置")][SerializeField] private GameSettings gameSetting;
+        public Dictionary<Type, UIElement> UIElementDic;
 
-        public GameSettings GameSetting
-        {
-            get { return gameSetting; }
-        }
-
-        protected override void Awake()
+        public override void Init()
         {
             if (Instance != null)
             {
                 Destroy(gameObject);
                 return;
             }
-
-            base.Awake();
             DontDestroyOnLoad(gameObject);
+            base.Init();
             // 初始化所有管理器
             InitManager();
         }
 
         private void InitManager()
         {
+            EventCenter.Clear();
+            PoolMgr.Clear();
+            UIElementAttribute();
             SingletonMonoMgr[] managers = GetComponents<SingletonMonoMgr>();
             for (int i = 0; i < managers.Length; i++)
             {
+                if (managers[i] == this) continue;
                 managers[i].Init();
             }
         }
 
-#if UNITY_EDITOR
-
-        static GameRoot()
+        private void UIElementAttribute()
         {
-            EditorApplication.update += () => { InitForEditor(); };
-        }
-
-        [InitializeOnLoadMethod]
-        public static void InitForEditor()
-        {
-            // 当前是否要进行播放或准备播放中
-            if (EditorApplication.isPlayingOrWillChangePlaymode)
+            UIElementDic = new Dictionary<Type, UIElement>();
+            UIElementDic.Clear();
+            // 获取所有程序集
+            Assembly[] asms = AppDomain.CurrentDomain.GetAssemblies();
+            Type baseType = typeof(BasePanel);
+            // 遍历程序集
+            foreach (Assembly assembly in asms)
             {
-                return;
-            }
-
-            if (Instance == null && GameObject.Find("GameRoot") != null)
-            {
-                Instance = GameObject.Find("GameRoot").GetComponent<GameRoot>();
-                // 清空事件
-                EventCenter.Clear();
-                Instance.InitManager();
-                Instance.GameSetting.InitForEditor();
+                // 遍历程序集下的每一个类型
+                Type[] types = assembly.GetTypes();
+                foreach (Type type in types)
+                {
+                    if (baseType.IsAssignableFrom(type)
+                        && !type.IsAbstract)
+                    {
+                        UIElementAttribute attribute = type.GetCustomAttribute<UIElementAttribute>();
+                        if (attribute != null)
+                        {
+                            UIElementDic.Add(type, new UIElement()
+                            {
+                                prefabAssetName = attribute.prefabAssetName,
+                                layerNum = attribute.layerNum
+                            });
+                        }
+                    }
+                }
             }
         }
-
-#endif
     }
 }

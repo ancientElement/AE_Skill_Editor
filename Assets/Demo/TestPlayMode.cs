@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using ARPG_AE_JOKER.SkillEditor;
+using AE_Framework;
 
 public class TestPlayMode : MonoBehaviour
 {
@@ -9,20 +10,15 @@ public class TestPlayMode : MonoBehaviour
     [SerializeField] private Skill_Player skill_Player;
     [SerializeField] private SkillConfig[] skillConfig;
     [SerializeField] private CharacterController characterController;
-    [SerializeField] private Rigidbody body;
     [SerializeField] private AnimationClip idleClip;
-    [SerializeField] private Transform[] weapons;
-    [SerializeField] private SkillConfig[] katana_open;
-    [SerializeField] private SkillConfig[] grateSword_open;
-    [Range(0, 9.8f), SerializeField] private float grativ;
-    [SerializeField, Range(1, -1)] private int useRigidBodyOrCharactorContrller;
     [SerializeField] private SkillEditorSceneCamera skillEditorSceneCamera;
+    [SerializeField] private GameRoot GameRoot;
 
     private void Awake()
     {
+        GameRoot.Init();
         skill_Player.Init(animationPlayer, modelTransfrom);
-        animationPlayer.Init();
-        body = GetComponentInParent<Rigidbody>();
+        animationPlayer.Init(GetComponent<Animator>(),GetComponent<CharacterController>());
         skillEditorSceneCamera = GameObject.Find("SkillEditorSceneCamera").GetComponent<SkillEditorSceneCamera>();
         skillEditorSceneCamera.focus = GameObject.Find("CameraPos").transform;
     }
@@ -31,12 +27,6 @@ public class TestPlayMode : MonoBehaviour
     private void Start()
     {
         animationPlayer.PlayAnimation(idleClip.name, idleClip, 0.2f);
-
-
-        foreach (var item in weapons)
-        {
-            item.gameObject.SetActive(false);
-        }
 
         animationPlayer.AddAnimationEventListener("StartInput", () =>
         {
@@ -68,16 +58,5 @@ public class TestPlayMode : MonoBehaviour
     {
         print("End");
         animationPlayer.PlayAnimation(idleClip.name, idleClip, 0.2f);
-        body.velocity = Vector3.zero;
-    }
-
-    public void RootMotionEvent(Vector3 pos, Quaternion rot, Vector3 velocity)
-    {
-        pos.y -= grativ * Time.deltaTime;
-        if (useRigidBodyOrCharactorContrller < 0)
-            body.velocity = velocity;
-        else
-            characterController.Move(pos);
-        modelTransfrom.transform.rotation *= rot;
     }
 }

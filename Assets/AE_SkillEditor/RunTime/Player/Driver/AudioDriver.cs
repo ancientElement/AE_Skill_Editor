@@ -6,7 +6,7 @@ namespace ARPG_AE_JOKER.SkillEditor
 {
     public class AudioDriver
     {
-        public static void Drive(SkillMultiLineTrackDataBase<SkillAudioEvent> AudioData, int currentFrameIndex, Vector3 position)
+        public static void Drive(SkillMultiLineTrackDataBase<SkillAudioEvent> AudioData, int currentFrameIndex)
         {
             if (AudioData != null)
             {
@@ -16,7 +16,7 @@ namespace ARPG_AE_JOKER.SkillEditor
                     {
                         if (audioEvent.FrameIndex == currentFrameIndex)
                         {
-                            MusicMgr.Instance.PlaySoundMusic(audioEvent.AudioClip, position, volumn: audioEvent.volumn);
+                            MusicMgr.Instance.PlaySoundMusic(audioEvent.AudioClip, volumn: audioEvent.volumn);
                         }
                     }
                 }

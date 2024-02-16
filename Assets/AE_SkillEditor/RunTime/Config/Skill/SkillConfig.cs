@@ -8,6 +8,7 @@ namespace ARPG_AE_JOKER.SkillEditor
 {
     [CreateAssetMenu(fileName = "SkillConfig", menuName = "Config/SkillConfig")]
     public class SkillConfig : SerializedScriptableObject
+    //public class SkillConfig : ScriptableObject
     {
         [LabelText("技能名称")] public string skillName;
         [LabelText("帧数上线")] public int FrameCount = 100;

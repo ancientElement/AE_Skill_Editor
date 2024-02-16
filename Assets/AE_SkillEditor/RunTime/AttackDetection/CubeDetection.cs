@@ -59,10 +59,17 @@ namespace ARPG_AE_JOKER.SkillEditor
 
             for (int i = 0; i < temp_detectionResult.Length; i++)
             {
-                if (detectionResult == null)
-                    EventCenter.TriggerEvent<Collider>("BeAttacked", temp_detectionResult[i]);
-                else if (temp_detectionResult[i] != null && !detectionResult.Contains(temp_detectionResult[i]))
-                    EventCenter.TriggerEvent<Collider>("BeAttacked", temp_detectionResult[i]);
+                if (detectionResult != null)
+                {
+                    if (!detectionResult.Contains(temp_detectionResult[i]))
+                    {
+                        temp_detectionResult[i].GetComponent<TakeDamageComponent>()?.TakeDamage();
+                    }
+                }
+                else
+                {
+                    temp_detectionResult[i].GetComponent<TakeDamageComponent>()?.TakeDamage();
+                }
             }
             detectionResult = temp_detectionResult;
         }

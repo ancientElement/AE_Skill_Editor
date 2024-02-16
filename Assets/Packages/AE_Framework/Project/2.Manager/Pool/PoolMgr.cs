@@ -1,8 +1,8 @@
-using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace AE_Framework
 {
@@ -11,18 +11,20 @@ namespace AE_Framework
     /// </summary>
     public class GameObjectPoolData
     {
-        private GameObject fatherObj; //场景上的父节点
+        private Scene fatherScene;
         public List<GameObject> Datalist; //抽屉
+
 
         //当外部需要创建这个抽屉时
         //初始化抽屉
         //创建场景上的父节点(与物体同名) 挂载到场景上的pool
         //并放入第一个物体
-        public GameObjectPoolData(GameObject poolObj, GameObject obj, string name)
+        public GameObjectPoolData(Scene _poolScene, GameObject obj, string name)
         {
+            fatherScene = _poolScene;
             Datalist = new List<GameObject>();
-            fatherObj = new GameObject(name);
-            fatherObj.transform.parent = poolObj.transform;
+            //fatherObj = new GameObject(name);
+            //fatherObj.transform.parent = poolObj.transform;
             PushObj(obj);
         }
 
@@ -33,7 +35,7 @@ namespace AE_Framework
         public GameObject GetObj()
         {
             GameObject obj = Datalist[0];
-            obj.transform.parent = null;
+            //obj.transform.parent = null;
             obj.SetActive(true);
             Datalist.RemoveAt(0);
             return obj;
@@ -42,7 +44,7 @@ namespace AE_Framework
         public GameObject GetObj(Vector3 position, Quaternion rotation)
         {
             GameObject obj = Datalist[0];
-            obj.transform.parent = null;
+            //obj.transform.parent = null;
             obj.transform.position = position;
             obj.transform.rotation = rotation;
             obj.SetActive(true);
@@ -56,7 +58,8 @@ namespace AE_Framework
         public void PushObj(GameObject obj)
         {
             obj.SetActive(false);
-            obj.transform.parent = fatherObj.transform;
+            obj.transform.parent = null;
+            SceneManager.MoveGameObjectToScene(obj, fatherScene);
             Datalist.Add(obj);
         }
 
@@ -65,17 +68,7 @@ namespace AE_Framework
         /// </summary>
         public void Destory()
         {
-            for (int i = Datalist.Count - 1; i >= 0; i--)
-            {
-                ResMgr.ReleaseInstance(Datalist[i]);
-            }
-
             Datalist.Clear();
-#if UNITY_EDITOR
-            GameObject.DestroyImmediate(fatherObj);
-#else
-            GameObject.Destroy(fatherObj);
-#endif
         }
     }
 
@@ -105,7 +98,6 @@ namespace AE_Framework
         }
 
         //将物体失活
-        //设置父级为fatherObj
         //放进抽屉里
         public void PushObj(object obj)
         {
@@ -118,31 +110,23 @@ namespace AE_Framework
     /// </summary>
     public static class PoolMgr
     {
-        [LabelText("游戏对象缓存池父节点")] public static GameObject poolObj; //场景上代表物体的空节点
+        private static Scene poolScene;
 
         /// <summary>
         /// 游戏对象缓存池
         /// </summary>
-        private static Dictionary<string, GameObjectPoolData> gameObjectPoolDic =
-            new Dictionary<string, GameObjectPoolData>();
+        private static Dictionary<string, GameObjectPoolData> gameObjectPoolDic;
 
         /// <summary>
         /// 普通对象缓存池
         /// </summary>
-        private static Dictionary<string, ObjectPoolData> objectPoolDic = new Dictionary<string, ObjectPoolData>();
+        private static Dictionary<string, ObjectPoolData> objectPoolDic;
 
         static PoolMgr()
         {
-            Init();
-        }
-
-        /// <summary>
-        /// 缓存池初始化
-        /// </summary>
-        public static void Init()
-        {
-            if (poolObj == null)
-                poolObj = new GameObject("Pool");
+            poolScene = SceneManager.CreateScene("PoolMgr");
+            gameObjectPoolDic = new Dictionary<string, GameObjectPoolData>();
+            objectPoolDic = new Dictionary<string, ObjectPoolData>();
         }
 
         #region 游戏对象缓存池
@@ -153,16 +137,7 @@ namespace AE_Framework
             {
                 return gameObjectPoolDic[name].GetObj();
             }
-            else
-            {
-                GameObject obj = ResMgr.AddressableLoad<GameObject>(name);
-                if (obj == null)
-                {
-                    Debug.LogWarning($"{name}不存在请检测Addressable");
-                }
-
-                return obj;
-            }
+            return null;
         }
 
         public static GameObject GetGameObj(string name, Vector3 position, Quaternion rotation)
@@ -171,25 +146,6 @@ namespace AE_Framework
             {
                 return gameObjectPoolDic[name].GetObj(position, rotation);
             }
-            else
-            {
-                GameObject obj = ResMgr.AddressableLoad<GameObject>(name);
-                if (obj == null)
-                {
-                    Debug.LogWarning($"{name}不存在请检测Addressable");
-                }
-
-                return obj;
-            }
-        }
-
-        public static GameObject GetGameObjNotInRes(string name)
-        {
-            if (gameObjectPoolDic.ContainsKey(name) && gameObjectPoolDic[name].Datalist.Count > 0)
-            {
-                return gameObjectPoolDic[name].GetObj();
-            }
-
             return null;
         }
 
@@ -200,7 +156,6 @@ namespace AE_Framework
         /// <param name="obj"></param>
         public static void PushGameObj(string name, GameObject obj)
         {
-            Init();
             obj.SetActive(false);
             if (gameObjectPoolDic.ContainsKey(name))
             {
@@ -208,7 +163,7 @@ namespace AE_Framework
             }
             else
             {
-                gameObjectPoolDic.Add(name, new GameObjectPoolData(poolObj, obj, name));
+                gameObjectPoolDic.Add(name, new GameObjectPoolData(poolScene, obj, name));
             }
         }
 
@@ -238,7 +193,7 @@ namespace AE_Framework
             string name = typeof(T).FullName;
             if (objectPoolDic.ContainsKey(name) && objectPoolDic[name].Datalist.Count > 0)
             {
-                return (T)objectPoolDic[name].GetObj();
+                return objectPoolDic[name].GetObj() as T;
             }
             else
             {
@@ -267,7 +222,17 @@ namespace AE_Framework
 
         #region 清理对象池
 
-        public static void Clear(bool isGameObject, bool isObject)
+        public static void ClearAllGameObject()
+        {
+            Clear(true, false);
+        }
+
+        public static void ClearAllObject()
+        {
+            Clear(false, true);
+        }
+
+        public static void Clear(bool isGameObject = true, bool isObject = true)
         {
             if (isGameObject)
             {
@@ -289,11 +254,6 @@ namespace AE_Framework
             }
         }
 
-        public static void ClearAllGameObject()
-        {
-            Clear(true, false);
-        }
-
         public static void ClearGameObject(string name)
         {
             if (!gameObjectPoolDic.ContainsKey(name)) return;
@@ -302,21 +262,10 @@ namespace AE_Framework
             gameObjectPoolDic.Remove(name);
         }
 
-        public static void ClearAllObject()
-        {
-            Clear(false, true);
-        }
-
         public static void ClearObject<T>()
         {
             if (!objectPoolDic.ContainsKey(typeof(T).FullName)) return;
             objectPoolDic.Remove(typeof(T).FullName);
-        }
-
-        public static void ClearObject(Type type)
-        {
-            if (!objectPoolDic.ContainsKey(type.FullName)) return;
-            objectPoolDic.Remove(type.FullName);
         }
 
         #endregion 清理对象池

@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &995960714983423776
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6175727097673161766}
+  - component: {fileID: 3583317907307762702}
+  m_Layer: 0
+  m_Name: TestPlayMode
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6175727097673161766
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995960714983423776}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3583317907307762702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995960714983423776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56bd9e3702bcc3c4e92c937502a8ace1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationPlayer: {fileID: 0}
+  modelTransfrom: {fileID: 0}
+  skill_Player: {fileID: 0}
+  skillConfig:
+  - {fileID: 11400000, guid: e4354edfa18e4384da878e6ca3d1d06d, type: 2}
+  characterController: {fileID: 0}
+  body: {fileID: 0}
+  idleClip: {fileID: 2457295268609474640, guid: 7d11c62956b6c0543a0c4f11906ab61e, type: 3}
+  weapons:
+  - {fileID: 0}
+  - {fileID: 0}
+  katana_open: []
+  grateSword_open: []
+  grativ: 0
+  useRigidBodyOrCharactorContrller: -1
+  skillEditorSceneCamera: {fileID: 0}
+  GameRoot: {fileID: 0}

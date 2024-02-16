@@ -1,5 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
-using System;
+﻿using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -58,35 +57,21 @@ namespace AE_Framework
                 callback(res.asset as T);
         }
 
-        /// <summary>
-        /// Resources异步加载资源
-        /// </summary>
-        public static async UniTask<T> ResourcesLoadAsync<T>(string assetName, Transform parent = null)
-            where T : UnityEngine.Object
-        {
-            ResourceRequest res = Resources.LoadAsync<T>(assetName);
-            //等待加载完毕
-            await res;
-            //加载完毕后判断资源是否是GameObject对象
-            //是则实例化后方返回
-            if (res.asset is GameObject)
-                return GameObject.Instantiate(res.asset, parent) as T;
-            else
-                return res.asset as T;
-        }
-
         #endregion Resources
 
         #region Addressable
 
         /// <summary>
-        /// Addressable同步加载游戏物体
+        /// Addressable同步加载
         /// </summary>
         public static T AddressableLoad<T>(string assetName, Transform parent = null) where T : UnityEngine.Object
         {
             if (typeof(T) == typeof(GameObject))
             {
-                return Addressables.InstantiateAsync(assetName).WaitForCompletion() as T;
+                if (parent != null)
+                    return Addressables.InstantiateAsync(assetName, parent).WaitForCompletion() as T;
+                else
+                    return Addressables.InstantiateAsync(assetName).WaitForCompletion() as T;
             }
             else
             {
@@ -95,22 +80,7 @@ namespace AE_Framework
         }
 
         /// <summary>
-        /// Addressable同步加载游戏物体
-        /// </summary>
-        public static T AddressableLoad<T>(AssetReference asset) where T : UnityEngine.Object
-        {
-            if (typeof(T) == typeof(GameObject))
-            {
-                return Addressables.InstantiateAsync(asset).WaitForCompletion() as T;
-            }
-            else
-            {
-                return Addressables.LoadAssetAsync<T>(asset).WaitForCompletion();
-            }
-        }
-
-        /// <summary>
-        ///  Addressable异步加载游戏物体
+        ///  Addressable异步加载
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="assetName"></param>
@@ -126,7 +96,6 @@ namespace AE_Framework
             Transform parent = null)
             where T : class
         {
-            // 不通过缓存池
             if (typeof(T) == typeof(GameObject))
             {
                 var request = Addressables.InstantiateAsync(assetName, parent);
@@ -142,7 +111,7 @@ namespace AE_Framework
         }
 
         /// <summary>
-        /// Addressable异步加载游戏物体
+        /// Addressable异步加载
         /// </summary>
         /// <typeparam name="T">具体的组件</typeparam>
         public static void AddressableLoadAsync<T>(AssetReference assetReference, Action<T> callBack = null,
@@ -166,49 +135,6 @@ namespace AE_Framework
                 var request = Addressables.LoadAssetAsync<T>(assetReference);
                 yield return request;
                 callBack?.Invoke(request.Result);
-            }
-        }
-
-        /// <summary>
-        /// UniTask Addressable异步加载游戏物体
-        /// </summary>
-        public static async UniTask<T> AddressableLoadUniTaskAsync<T>(string assetName,
-            Action<GameObject> callBack = null,
-            Transform parent = null) where T : class
-        {
-            // 不通过缓存池
-            if (typeof(T) == typeof(GameObject))
-            {
-                var handel = Addressables.InstantiateAsync(assetName);
-                await handel;
-                return handel.Result as T;
-            }
-            else
-            {
-                var handel = Addressables.LoadAssetAsync<T>(assetName);
-                await handel;
-                return handel.Result as T;
-            }
-        }
-
-        /// <summary>
-        /// UniTask Addressable异步加载游戏物体
-        /// </summary>
-        public static async UniTask<T> AddressableLoadUniTaskAsync<T>(AssetReference assetReference,
-            Action<GameObject> callBack = null, Transform parent = null) where T : class
-        {
-            // 不通过缓存池
-            if (typeof(T) == typeof(GameObject))
-            {
-                var handel = Addressables.InstantiateAsync(assetReference);
-                await handel;
-                return handel.Result as T;
-            }
-            else
-            {
-                var handel = Addressables.LoadAssetAsync<T>(assetReference);
-                await handel;
-                return handel.Result as T;
             }
         }
 

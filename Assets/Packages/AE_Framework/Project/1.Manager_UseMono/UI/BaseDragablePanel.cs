@@ -10,19 +10,19 @@ namespace AE_Framework
     {
         [SerializeField] private Vector2 offset;
 
-        public void OnDrag(PointerEventData eventData)
+        public virtual void OnDrag(PointerEventData eventData)
         {
             (transform as RectTransform).position = eventData.position - offset;
             transform.SetAsLastSibling();
         }
 
-        public void OnBeginDrag(PointerEventData eventData)
+        public virtual void OnBeginDrag(PointerEventData eventData)
         {
             RectTransformUtility.ScreenPointToLocalPointInRectangle(transform as RectTransform,
                         Input.mousePosition, (eventData as PointerEventData).pressEventCamera, out offset);
         }
 
-        public void OnEndDrag(PointerEventData eventData)
+        public virtual void OnEndDrag(PointerEventData eventData)
         {
         }
     }

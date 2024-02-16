@@ -9,10 +9,10 @@ namespace ARPG_AE_JOKER.SkillEditor
     {
         private AEAnimController m_aeanim;
 
-        public void Init()
+        public void Init(Animator animator,CharacterController characterController)
         {
-            m_aeanim = new AEAnimController(this, GetComponent<Animator>(), transform, GetComponent<Rigidbody>());
-
+            m_aeanim = new AEAnimController(this, animator, transform, characterController);
+            m_aeanim.AddAnimator("Animator",0.2f);
             m_aeanim.Start();
         }
 
@@ -20,6 +20,7 @@ namespace ARPG_AE_JOKER.SkillEditor
         {
             m_aeanim.ApplayRootMotion();
         }
+
         public void PreventRootMotion()
         {
             m_aeanim.PreventRootMotion();
@@ -78,6 +79,10 @@ namespace ARPG_AE_JOKER.SkillEditor
             animationEventDic.Clear();
         }
 
+        public void OnAnimatorMove()
+        {
+            m_aeanim.OnAnimatorMove();
+        }
         #endregion 动画事件
     }
 }

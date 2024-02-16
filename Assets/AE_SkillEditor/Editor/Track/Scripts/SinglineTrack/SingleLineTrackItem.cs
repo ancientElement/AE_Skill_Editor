@@ -79,8 +79,8 @@ namespace ARPG_AE_JOKER.SkillEditor
             if (startDragFrameIndex != frameIndex)
             {
                 m_ParentTrack.SetFrameIndex(startDragFrameIndex, frameIndex);
-                if (SkillEditorInspector.Instance != null)
-                    SkillEditorInspector.Instance.SetTrackItemIndex(frameIndex);
+                //if (SkillEditorInspector.Instance != null)
+                //    SkillEditorInspector.Instance.SetTrackItemIndex(frameIndex);
             }
         }
 

@@ -14,6 +14,8 @@ namespace ARPG_AE_JOKER.SkillEditor
 
     public class Skill_Player : MonoBehaviour
     {
+        public bool debugMode;
+
         private ISkillAnimationPlayer m_animationPlayer;
 
         private bool isPlaying;
@@ -119,13 +121,13 @@ namespace ARPG_AE_JOKER.SkillEditor
             AnimationDriver.Drive(AnimationData, currentFrameIndex, m_animationPlayer);
 
             //驱动音效果
-            AudioDriver.Drive(AudioData, currentFrameIndex, transform.position);
+            AudioDriver.Drive(AudioData, currentFrameIndex);
 
             //驱动特效
             EffectDriver.Drive(EffectData, currentFrameIndex, modelTransfrom, frameRate);
 
             //驱动攻击检测
-            AttackDetectionDriver.Driver(attackDetectionData, currentFrameIndex, modelTransfrom, frameRate);
+            AttackDetectionDriver.Driver(attackDetectionData, currentFrameIndex, modelTransfrom, frameRate, debugMode);
 
             //事件驱动
             EventTrigerDriver.Drive(m_animationPlayer, eventTrigerData, currentFrameIndex);

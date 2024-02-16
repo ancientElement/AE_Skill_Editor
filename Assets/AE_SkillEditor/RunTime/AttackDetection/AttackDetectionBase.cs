@@ -22,5 +22,12 @@ namespace ARPG_AE_JOKER.SkillEditor
         public virtual void CreatMesh() { }
 
         public virtual void ResetData() { }
+
+#if UNITY_EDITOR
+        public void OnValidate()
+        {
+            CreatMesh();
+        }
+#endif
     }
 }

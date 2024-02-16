@@ -42,7 +42,7 @@ namespace ARPG_AE_JOKER.SkillEditor
             Handles.matrix = oldMat;
 
             Gizmos.color = new Color(1, 0, 0, 0.5f);
-            Gizmos.DrawMesh(mesh,transform.localPosition,transform.localRotation);
+            Gizmos.DrawMesh(mesh, transform.localPosition, transform.localRotation);
         }
 
         public override void ResetData()
@@ -124,10 +124,19 @@ namespace ARPG_AE_JOKER.SkillEditor
                     temp_detectionResult[i] = null;
                 }
 
-                if (detectionResult == null)
-                    EventCenter.TriggerEvent<Collider>("BeAttacked", temp_detectionResult[i]);
-                else if (temp_detectionResult[i] != null && !detectionResult.Contains(temp_detectionResult[i]))
-                    EventCenter.TriggerEvent<Collider>("BeAttacked", temp_detectionResult[i]);
+                if (temp_detectionResult[i] == null) continue;
+
+                if (detectionResult != null)
+                {
+                    if (!detectionResult.Contains(temp_detectionResult[i]))
+                    {
+                        temp_detectionResult[i].GetComponent<TakeDamageComponent>()?.TakeDamage();
+                    }
+                }
+                else
+                {
+                    temp_detectionResult[i].GetComponent<TakeDamageComponent>()?.TakeDamage();
+                }
             }
             detectionResult = temp_detectionResult;
         }

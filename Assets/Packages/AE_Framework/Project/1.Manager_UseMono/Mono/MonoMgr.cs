@@ -80,15 +80,5 @@ namespace AE_Framework
         {
             fixedUpdateEvent -= action;
         }
-
-        /// <summary>
-        /// 没有弄清除不要轻易调用 会清除InputMgr的事件 最好用RemoveUpdateEventListener移除
-        /// </summary>
-        public void Clear()
-        {
-            updateEvent = null;
-            lateUpdateEvent = null;
-            fixedUpdateEvent = null;
-        }
     }
 }

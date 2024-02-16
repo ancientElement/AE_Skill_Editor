@@ -16,21 +16,16 @@ namespace ARPG_AE_JOKER.SkillEditor
         {
             get
             {
-                if (SkillEditorWindow.Instance.isOnEditorScene)
+                if (tempAttackDetectioin == null)
                 {
+                    tempAttackDetectioin = GameObject.Find("====SkillEditorDetections====");
                     if (tempAttackDetectioin == null)
                     {
-                        tempAttackDetectioin = GameObject.Find("Detections");
-                        if (tempAttackDetectioin == null)
-                        {
-                            tempAttackDetectioin = new GameObject("Detections");
-                            tempAttackDetectioin.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
-                        }
+                        tempAttackDetectioin = new GameObject("====SkillEditorDetections====");
+                        tempAttackDetectioin.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
                     }
-                    return tempAttackDetectioin;
                 }
-                Debug.LogWarning("不在编辑器场景下");
-                return null;
+                return tempAttackDetectioin;
             }
             private set { tempAttackDetectioin = value; }
         }
@@ -47,11 +42,7 @@ namespace ARPG_AE_JOKER.SkillEditor
 
         public override void ClearScene()
         {
-            base.ClearScene();
-            for (int i = TempAttackDetectioin.transform.childCount - 1; i >= 0; i--)
-            {
-                GameObject.DestroyImmediate(TempAttackDetectioin.transform.GetChild(i).gameObject);
-            }
+            GameObject.DestroyImmediate(tempAttackDetectioin);
         }
     }
 
@@ -249,15 +240,16 @@ namespace ARPG_AE_JOKER.SkillEditor
         /// </summary> 
         public override void Select()
         {
+            //Debug.Log(ItemData.DetectionParamsBase.GetType().FullName);
             switch (ItemData.DetectionParamsBase.GetType().FullName)
             {
-                case "ARPG_AE_JOKER.SphereDetectionParams":
+                case "ARPG_AE_JOKER.SkillEditor.SphereDetectionParams":
                     SphereAttackDetectionEventInspectorHelper.Instance.Inspector(ItemData);
                     break;
-                case "ARPG_AE_JOKER.CubeDetectionParams":
+                case "ARPG_AE_JOKER.SkillEditor.CubeDetectionParams":
                     CubeAttackDetectionEventInspectorHelper.Instance.Inspector(ItemData);
                     break;
-                case "ARPG_AE_JOKER.RingLikeDetectionParams":
+                case "ARPG_AE_JOKER.SkillEditor.RingLikeDetectionParams":
                     RingLikeAttackDetectionEventInspectorHelper.Instance.Inspector(ItemData);
                     break;
             }

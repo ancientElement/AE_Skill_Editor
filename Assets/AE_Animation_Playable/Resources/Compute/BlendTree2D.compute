@@ -1,0 +1,25 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel Compute
+
+struct DataPair
+{
+    float x;
+    float y;
+    float ouput;
+};
+
+float pointerX;
+float pointerY;
+float eps;
+RWStructuredBuffer<DataPair> dataBuffer;
+
+float mdistance(DataPair data)
+{
+    return abs(pointerX - data.x) + abs(pointerY - data.y) + eps;
+}
+
+[numthreads(16,1,1)]
+void Compute(uint3 id : SV_DISPATCHTHREADID)
+{
+    dataBuffer[id.x].ouput = 1 / mdistance(dataBuffer[id.x]);
+}

@@ -1,5 +1,3 @@
-//using Sirenix.OdinInspector;
-
 using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -16,13 +14,13 @@ namespace AE_Framework
     /// </summary>
     public class UIMgr : SingletonMonoMgr<UIMgr>
     {
-        private Dictionary<Type, UIElement> UIElementDic => GameRoot.Instance.GameSetting.UIElementDic;
+        public Dictionary<Type, UIElement> UIElementDic => GameRoot.Instance.UIElementDic;
 
         /// <summary>
         /// 将canvas提供给外部
         /// </summary>
         //[LabelText("UI根节点")]
-        [SerializeField] public RectTransform UI_Root;
+        [SerializeField] private RectTransform UI_Root;
 
         //LabelText("UI层级")
         [SerializeField] private Transform[] Layers;

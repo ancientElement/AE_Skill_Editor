@@ -1,15 +1,10 @@
-﻿//using Sirenix.OdinInspector;
-
-namespace AE_Framework
+﻿namespace AE_Framework
 {
     /// <summary>
     /// UI元素
     /// </summary>
     public class UIElement
     {
-        //[LabelText("是否需要缓存")]
-        public bool isCache;
-
         //[LabelText("预制体路径")]
         public string prefabAssetName;
 
