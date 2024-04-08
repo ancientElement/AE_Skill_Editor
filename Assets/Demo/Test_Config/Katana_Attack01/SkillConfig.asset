@@ -67,7 +67,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 1
+      Data: 0
     - Name: $v
       Entry: 7
       Data: 5|ARPG_AE_JOKER.SkillEditor.SkillAnimationEvent, Assembly-CSharp
@@ -76,7 +76,7 @@ MonoBehaviour:
       Data: 0
     - Name: ApplyRootMotion
       Entry: 5
-      Data: false
+      Data: true
     - Name: TransitionTime
       Entry: 4
       Data: 0.25
@@ -120,7 +120,7 @@ MonoBehaviour:
       Data: 4
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 7
       Data: 
@@ -136,6 +136,57 @@ MonoBehaviour:
     - Name: eventName
       Entry: 7
       Data: 9|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 1
+      Data: "\u8BF7\u547D\u540D"
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: color
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0.5
+    - Name: 
+      Entry: 4
+      Data: 0.5
+    - Name: 
+      Entry: 4
+      Data: 0.5
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 32
+    - Name: $v
+      Entry: 7
+      Data: 10|ARPG_AE_JOKER.SkillEditor.EventTrigerEvent, Assembly-CSharp
+    - Name: FrameDuration
+      Entry: 3
+      Data: 1
+    - Name: eventName
+      Entry: 7
+      Data: 11|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
@@ -192,24 +243,24 @@ MonoBehaviour:
       Data: ARPG_AE_JOKER.SkillEditor.AttackDetectionTrack
     - Name: $v
       Entry: 7
-      Data: 10|ARPG_AE_JOKER.SkillEditor.SkillMultiLineTrackDataBase`1[[ARPG_AE_JOKER.SkillEditor.AttackDetectionEvent,
+      Data: 12|ARPG_AE_JOKER.SkillEditor.SkillMultiLineTrackDataBase`1[[ARPG_AE_JOKER.SkillEditor.AttackDetectionEvent,
         Assembly-CSharp]], Assembly-CSharp
     - Name: FrameData
       Entry: 7
-      Data: 11|System.Collections.Generic.List`1[[ARPG_AE_JOKER.SkillEditor.AttackDetectionEvent,
+      Data: 13|System.Collections.Generic.List`1[[ARPG_AE_JOKER.SkillEditor.AttackDetectionEvent,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 2
     - Name: 
       Entry: 7
-      Data: 12|ARPG_AE_JOKER.SkillEditor.AttackDetectionEvent, Assembly-CSharp
+      Data: 14|ARPG_AE_JOKER.SkillEditor.AttackDetectionEvent, Assembly-CSharp
     - Name: TrackName
       Entry: 1
       Data: "\u653B\u51FB\u68C0\u6D4B\u8F68\u9053"
     - Name: FrameIndex
       Entry: 3
-      Data: 55
+      Data: 43
     - Name: FrameDuration
       Entry: 3
       Data: 205
@@ -239,13 +290,13 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 4
-      Data: 0
+      Data: 273.099
     - Name: 
       Entry: 8
       Data: 
     - Name: DetectionParamsBase
       Entry: 7
-      Data: 13|ARPG_AE_JOKER.SkillEditor.RingLikeDetectionParams, Assembly-CSharp
+      Data: 15|ARPG_AE_JOKER.SkillEditor.RingLikeDetectionParams, Assembly-CSharp
     - Name: innerRadius
       Entry: 4
       Data: 2.13
@@ -275,7 +326,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 14|ARPG_AE_JOKER.SkillEditor.AttackDetectionEvent, Assembly-CSharp
+      Data: 16|ARPG_AE_JOKER.SkillEditor.AttackDetectionEvent, Assembly-CSharp
     - Name: TrackName
       Entry: 1
       Data: "\u653B\u51FB\u68C0\u6D4B\u8F68\u9053"
@@ -341,18 +392,18 @@ MonoBehaviour:
       Data: ARPG_AE_JOKER.SkillEditor.AudioTrack
     - Name: $v
       Entry: 7
-      Data: 15|ARPG_AE_JOKER.SkillEditor.SkillMultiLineTrackDataBase`1[[ARPG_AE_JOKER.SkillEditor.SkillAudioEvent,
+      Data: 17|ARPG_AE_JOKER.SkillEditor.SkillMultiLineTrackDataBase`1[[ARPG_AE_JOKER.SkillEditor.SkillAudioEvent,
         Assembly-CSharp]], Assembly-CSharp
     - Name: FrameData
       Entry: 7
-      Data: 16|System.Collections.Generic.List`1[[ARPG_AE_JOKER.SkillEditor.SkillAudioEvent,
+      Data: 18|System.Collections.Generic.List`1[[ARPG_AE_JOKER.SkillEditor.SkillAudioEvent,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 17|ARPG_AE_JOKER.SkillEditor.SkillAudioEvent, Assembly-CSharp
+      Data: 19|ARPG_AE_JOKER.SkillEditor.SkillAudioEvent, Assembly-CSharp
     - Name: TrackName
       Entry: 1
       Data: "\u97F3\u6548"
@@ -388,18 +439,18 @@ MonoBehaviour:
       Data: ARPG_AE_JOKER.SkillEditor.EffectTrack
     - Name: $v
       Entry: 7
-      Data: 18|ARPG_AE_JOKER.SkillEditor.SkillMultiLineTrackDataBase`1[[ARPG_AE_JOKER.SkillEditor.SkillEffectEvent,
+      Data: 20|ARPG_AE_JOKER.SkillEditor.SkillMultiLineTrackDataBase`1[[ARPG_AE_JOKER.SkillEditor.SkillEffectEvent,
         Assembly-CSharp]], Assembly-CSharp
     - Name: FrameData
       Entry: 7
-      Data: 19|System.Collections.Generic.List`1[[ARPG_AE_JOKER.SkillEditor.SkillEffectEvent,
+      Data: 21|System.Collections.Generic.List`1[[ARPG_AE_JOKER.SkillEditor.SkillEffectEvent,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 20|ARPG_AE_JOKER.SkillEditor.SkillEffectEvent, Assembly-CSharp
+      Data: 22|ARPG_AE_JOKER.SkillEditor.SkillEffectEvent, Assembly-CSharp
     - Name: TrackName
       Entry: 1
       Data: "\u7279\u6548"

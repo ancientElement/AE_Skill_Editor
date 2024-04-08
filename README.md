@@ -1,116 +1,97 @@
-![image-20240117113728866](ImagesAssets/image-20240117113728866.png)
+## 前言
 
-## 注意请勿修改项目结构
+本编辑器有很多地方都是不足的,也是早期的学习作品,我也没有再去修复,所以本编辑器推荐用于学习使用。
 
-## 依赖
+如果本人有精力,会出一套使用IMGUI制作的编辑器,大部分逻辑会套用此编辑器,当时会重构此编辑器的框架,因为现在的整体框架不太优雅了。
 
-- AE_Framework [ancientElement/AE_Framework (github.com)](https://github.com/ancientElement/AE_Framework) 轻量的游戏框架
-- AE_Animation_Playable [ancientElement/AE_Animation_Playable (github.com)](https://github.com/ancientElement/AE_Animation_Playable) 基于Playable 的动画系统
-- Addressable
-- URP(也可不用)
+如果想要了解本编辑器的制作请自行学习此项目,这里着重讲解本编辑器的使用。
 
-## 运行时示例使用
+你了解本编辑器的使用了,那么有源码参考对于制作而言就没有什么问题了。
 
-- 选择人物
+## 概览
 
-![image-20240117120741605](ImagesAssets/image-20240117120741605.png)
+创建配置文件需要右键`Creat-->Config-->SkillConfig`
 
-- 配置技能
+拖动时间轴,可以预览整体的播放。
 
-![image-20240117120820583](ImagesAssets/image-20240117120820583.png)
+添加动画、音效、特效、只需要直接拖拽即可。
 
-![image-20240117120901795](ImagesAssets/image-20240117120901795.png)
+事件、攻击检测需要右键添加。
 
-- 开始运行
+对于绿色部分滚轮负责缩放,蓝色左边部分,滚轮负责上下移动,蓝色右边滚轮负责左右移动。
 
-- 点击任意数字键,按数字播放对应index的技能
+![image-20240408130924672](ImagesAssets/image-20240408130924672.png)
 
+## 技能播放
 
+```csharp
+public class Skill_Player : MonoBehaviour
+```
 
-## 轨道的播放
+需要使用Skill_Player类来播放技能。
 
-可以参考`TestPlayMode.cs`和` TestAnimationPlayer.cs`
+##动画播放
 
-`AE_Animation_Playable`的使用请移步至[ancientElement/AE_Animation_Playable (github.com)](https://github.com/ancientElement/AE_Animation_Playable) 
+具体的动画播放其实是要你自己实现的。
 
-### 初始化
+实现以下接口的类,来播放动画,在本项目中,我使用了自定义的Playable,来播放动画。
 
-注意对`Skill_Player`进行初始化
+本项目中使用的Playable有一个小问题,连续播放统计一个技能时,判断为同一个动画Key就return了。可以根据自己的需要修改一下。
 
-![image-20240117115948975](ImagesAssets/image-20240117115948975.png)
+```csharp
+public interface ISkillAnimationPlayer
+{
+    public void PlayAnimation(string name, AnimationClip animationClip, float enterTIme);
+    public void TrigerAnimationEvent(string eventName);
+    public void ApplayRootMotion();
+    public void PreventRootMotion();
+}
+```
 
-## 内置轨道
+具体如何实现`ISkillAnimationPlayer`可以参考:
 
-### 资源的创建与添加
+```csharp
+public class TestAnimationPlayer : MonoBehaviour,ISkillAnimationPlayer
+```
 
-- 创建资源
+## 配置数据
 
-![image-20240117113354302](ImagesAssets/image-20240117113354302.png)
+点击任意Clip项都可以在Inspectors中看到对于Clip的数据,然后进行修改。
 
-- 打开窗口
+但是以下内置轨道不同。
 
-![image-20240117113024557](ImagesAssets/image-20240117113024557.png)
+Clip项都内置有右键复制、移动、删除等功能。
 
-- 加载资源
+## 配置动画轨道
 
-  ![image-20240117113051104](ImagesAssets/image-20240117113051104.png)
+动画轨道有右键RootMotion事件,可以用右键点击来配置RootMotion。
 
-- 添加轨道
+## 配置事件轨道
 
-![image-20240117113408548](ImagesAssets/image-20240117113408548.png)
+通过右键Project窗口来创建`Create-->AE技能编辑器-->事件列表`事件列表。
 
-### 动画轨道
+点击事件Clip项，选择事件列表，之后可以配置事件名称。
 
-将AnimationClip直接拖入动画轨道即可生成动画Event,可以通过拖拽调整长度
+## 配置攻击检测轨道
 
-![image-20240117112756187](ImagesAssets/image-20240117112756187.png)
+直接对场景中的攻击检测对象进行移动、旋转、缩放。
 
+再右键点击对准位置即可。
 
+## 特效轨道
 
-### 音频轨道
+配置方式与事件轨道一致。
 
-与动画轨道相同使用拖拽导入AudioClip,可以通过拖拽调整长度
+直接对场景中的攻击检测对象进行移动、旋转、缩放。
 
-动画轨道是多行轨道
+再右键点击对准位置即可。
 
-![image-20240117113606908](ImagesAssets/image-20240117113606908.png)
+## 注意事项
 
-可以同时播放多个音频
+如果你要用于工程中请将Auto保存打开,否则容易丢失数据。
 
-### 特效轨道
+请勿删除轨道脚本文件否则所有配置作废。
 
-使用上与上相同,特效需要调整位置,在Scene中调整好位置后,右键此处保存当前位置
+本项目配置依赖于Oding序列化,因为本项目的配置是使用字典,并使用Oding序列化字典。
 
-![image-20240117114009362](ImagesAssets/image-20240117114009362.png)
-
-### 事件轨道
-
-#### 添加事件
-
-右键轨道空白处可以添加一个事件
-
-![image-20240117114612332](ImagesAssets/image-20240117114612332.png)
-
-右键事件可以在同一个时间点添加多个事件
-
-![image-20240117114641228](ImagesAssets/image-20240117114641228.png)
-
-#### 面板
-
-![image-20240117114720618](ImagesAssets/image-20240117114720618.png)
-
-点击轨道中的事件出现面板
-
-- 事件名之后的是当前帧触发的事件,可以有多个,点击事件弹出事件列表和删除选项
-
-- 颜色是轨道上的事件颜色
-
-- 事件列表可以存储需要的事件名方便多次添加
-
-  ![image-20240117114943474](ImagesAssets/image-20240117114943474.png)
-
-## 自定义轨道
-
-![image-20240117120125981](ImagesAssets/image-20240117120125981.png)
-
-这里的内容很多文档还没有整理完成,可以大概通过注释了解
+添加轨道需要修改运行时代码,因为轨道类的转化是用字符串写死在`Skill_Player`中的，需要在`Skill_Player`添加轨道类。
