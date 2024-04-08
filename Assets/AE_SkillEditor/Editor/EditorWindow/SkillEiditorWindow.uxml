@@ -48,7 +48,7 @@
                     <uie:IntegerField value="0" name="FrameCountTextFiled" style="width: auto; height: auto;" />
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:ScrollView name="TrackMenuScrollView" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Hidden" focusable="true" style="flex-grow: 1; border-right-width: 0; border-left-color: rgb(34, 33, 33); border-right-color: rgb(34, 33, 33); border-top-color: rgb(34, 33, 33); border-bottom-color: rgb(34, 33, 33);">
+            <ui:ScrollView name="TrackMenuScrollView" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Hidden" style="flex-grow: 1; border-right-width: 0; border-left-color: rgb(34, 33, 33); border-right-color: rgb(34, 33, 33); border-top-color: rgb(34, 33, 33); border-bottom-color: rgb(34, 33, 33);">
                 <ui:VisualElement name="TrackMenuList" style="width: auto; height: 1000px; margin-left: 4px; flex-grow: 1; flex-shrink: 1; min-height: auto; max-height: none; border-left-color: rgb(34, 33, 33); border-right-color: rgb(34, 33, 33); border-top-color: rgb(34, 33, 33); border-bottom-color: rgb(34, 33, 33);">
                     <ui:VisualElement style="width: auto; min-width: auto; height: 10px; min-height: 10px;" />
                 </ui:VisualElement>
@@ -57,7 +57,7 @@
         <ui:VisualElement name="Right" style="flex-grow: 1; flex-shrink: 1; margin-left: 10px; margin-right: 0; height: 100%;">
             <ui:VisualElement style="width: 10px; height: 30px; position: absolute; left: -10px; right: auto; flex-shrink: 0; border-bottom-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(31, 31, 31);" />
             <ui:IMGUIContainer name="TimeShaft" style="height: 30px; margin-right: 12px; border-bottom-color: rgb(31, 31, 31); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0.5px; flex-shrink: 0; flex-grow: 0;" />
-            <ui:ScrollView name="MainContentView" mode="VerticalAndHorizontal" horizontal-scroller-visibility="AlwaysVisible" vertical-scroller-visibility="AlwaysVisible" focusable="false" style="flex-grow: 1; height: auto; flex-basis: auto; max-height: none; min-height: auto;">
+            <ui:ScrollView name="MainContentView" mode="VerticalAndHorizontal" horizontal-scroller-visibility="AlwaysVisible" vertical-scroller-visibility="AlwaysVisible" style="flex-grow: 1; height: auto; flex-basis: auto; max-height: none; min-height: auto;">
                 <ui:VisualElement name="ContentListView" style="min-height: auto; flex-shrink: 0; flex-grow: 0; height: 1000px;">
                     <ui:VisualElement style="height: 10px; max-height: none; min-height: 10px;" />
                 </ui:VisualElement>

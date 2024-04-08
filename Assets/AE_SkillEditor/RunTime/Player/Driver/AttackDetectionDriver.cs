@@ -47,7 +47,8 @@ namespace ARPG_AE_JOKER.SkillEditor
                             }
 
                             demo.Init(attackDetectionEvent.DetectionParamsBase);
-                            demo.isDebuge = !Application.isPlaying;
+                            //demo.isDebuge = !Application.isPlaying;debugMode
+                            demo.isDebuge = debugMode;
 
                             attackDetectionObj.transform.position = modelTransfrom.TransformPoint(attackDetectionEvent.Position);
                             attackDetectionObj.transform.rotation = Quaternion.Euler(modelTransfrom.eulerAngles + attackDetectionEvent.Rotation);

@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using UnityEditor.SceneManagement;
 using Unity.EditorCoroutines.Editor;
 using UnityEngine.SceneManagement;
-using static UnityEditor.PlayerSettings;
 
 namespace ARPG_AE_JOKER.SkillEditor
 {
@@ -730,6 +729,7 @@ namespace ARPG_AE_JOKER.SkillEditor
             if (ContentListView != null)
                 ContentListView.style.width = skillEditorConfig.frameUniWidth * CurrentFrameCount;
         }
+
 
         /// <summary>
         /// 初始化主要容器
