@@ -1,3 +1,17 @@
+## 项目重构!!!
+
+[ancientElement/AE_SkillEditor_Plus: AE_Skill_Editor的Plus版本 (github.com)](https://github.com/ancientElement/AE_SkillEditor_Plus)
+
+更加优美的UI界面
+
+更加优雅的代码结构
+
+更加简洁的自定义
+
+丢弃所有第三方依赖
+
+有各位的支持重构更有动力!!!
+
 ## 前言
 
 由于我自己对编辑器的拓展和修改,有很多地方都是**不足**的,因为是我早期**学习**的作品,所以本编辑器推荐用于学习使用。
